@@ -10,17 +10,20 @@
     <div class="form-group">
         <label th:for="name">User Name</label>
         <input class="form-control" th:field="*{name}"/>
+        <span th:text="${usernameError}" class="error-message"></span>
 
     </div>
     <div class="form-group">
         <label th:for="email">Email</label>
         <input type="email" class="form-control" th:field="*{email}"/>
-
-
+        <span th:text="${emailError}" class="error-message"></span>
     </div>
+
     <div class="form-group">
         <label th:for="password">Password</label>
         <input type="password" class="form-control" th:field="*{password}"/>
+        <span th:text="${passwordError}" class="error-message"></span>
+
 
     </div>
     <div class="form-group">
@@ -29,19 +32,5 @@
     </div>
     <input type="submit" value="Sign Up" />
 </form>
-
-<!--
-<form method="post" style="max-width:600px;" th:object="${user}">
-    <div class="form-group">
-        <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error"></span>
-    </div>
-
-
-    <input type="submit" value="Sign Up" />
-</form>
--->
-
 </body>
 </html>

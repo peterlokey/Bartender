@@ -1,10 +1,11 @@
 package org.launchcode.Bartender.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.launchcode.Bartender.models.data.UserDao;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 @Entity
 public class User {
@@ -14,7 +15,8 @@ public class User {
     private int id;
 
     @NotNull
-    @Size(min=4, max=12)
+    @Column(unique=true)
+    @Size(min=4, max=12, message = "User name must be between 4 and 12 characters")
     private String name;
 
     @NotNull
@@ -64,5 +66,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }
 
