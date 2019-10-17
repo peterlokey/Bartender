@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Null;
@@ -24,7 +25,7 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "signup", method= RequestMethod.GET)
+    @RequestMapping(value = "signup", method = RequestMethod.GET)
     public String signUp(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("title", "Sign Up");
@@ -76,7 +77,6 @@ public class UserController {
             hasErrors = true;
         }
 
-
         if (hasErrors) {
             return "user/sign-up";
         }
@@ -85,4 +85,41 @@ public class UserController {
         model.addAttribute("name", user.getName());
         return "user/index";
     }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login(Model model) {
+
+        model.addAttribute("title", "Log In");
+        return "user/login";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String login(Model model, @RequestParam String email, @RequestParam String password) {
+        int userId = 0;
+        boolean found = false;
+        for (User user : userDao.findAll()) {
+            if (user.getEmail().equals(email)){
+                userId = user.getId();
+                found = true;
+            }
+        }
+
+        if (!found){
+            model.addAttribute("emailError", "Email not found");
+            return "user/login";
+        }
+        User user = userDao.findById(userId).orElse(null);
+
+        if (!user.getPassword().equals(password)){
+            model.addAttribute("emailError", "Email and password do not match");
+            model.addAttribute("email", email);
+            return "user/login";
+        }
+
+        //TODO: Implement Session for logged-in user
+        model.addAttribute("name", user.getName());
+        return "user/index";
+
+    }
+
 }

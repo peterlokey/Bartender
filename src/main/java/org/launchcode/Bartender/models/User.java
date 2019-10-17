@@ -20,10 +20,11 @@ public class User {
     private String name;
 
     @NotNull
-    private String email; //add email validation in UserController
+    @Column(unique=true)
+    private String email;
 
     @NotNull
-    private String password; //add validation in controller
+    private String password;
 
     public User (int id, String name, String email, String password) {
         this();
