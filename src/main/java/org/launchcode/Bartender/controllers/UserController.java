@@ -15,8 +15,6 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
-//TODO: verify username is available
-
 
 @Controller
 @RequestMapping(value = "user")

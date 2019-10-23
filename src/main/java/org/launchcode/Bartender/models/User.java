@@ -16,7 +16,7 @@ public class User {
 
     @NotNull
     @Column(unique=true)
-    @Size(min=4, max=12, message = "User name must be between 4 and 12 characters")
+    @Size(min=4, max=12)
     private String name;
 
     @NotNull
