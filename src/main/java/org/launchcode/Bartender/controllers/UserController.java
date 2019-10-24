@@ -15,6 +15,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
+//TODO : To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
 
 @Controller
 @RequestMapping(value = "user")

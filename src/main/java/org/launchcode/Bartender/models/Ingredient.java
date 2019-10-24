@@ -16,14 +16,17 @@ public class Ingredient {
     private String name;
 
     @NotNull
-    private enum type{
+    private Type type;
+
+    public enum Type{
         VODKA, GIN, RUM, TEQUILA, WHISKEY, CORDIAL, WINE, MIXER, GARNISH
     }
 
-    public Ingredient (int id, String name) {
+    public Ingredient (int id, String name, Type type) {
         this();
         this.id = id;
         this.name = name;
+        this.type = type;
     }
 
     public Ingredient() {}
@@ -42,5 +45,13 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }

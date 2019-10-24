@@ -1,3 +1,4 @@
+/*
 package org.launchcode.Bartender;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,3 +47,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 }
+*/

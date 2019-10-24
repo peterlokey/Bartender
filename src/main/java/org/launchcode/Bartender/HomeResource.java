@@ -1,3 +1,4 @@
+/*
 package org.launchcode.Bartender;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,3 +22,4 @@ public class HomeResource {
         return ("<h1>Welcome Admin</h1>");
     }
 }
+*/
