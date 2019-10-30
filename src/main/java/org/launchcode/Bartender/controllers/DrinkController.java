@@ -33,27 +33,21 @@ public class DrinkController {
 
         Drink drink = drinkDao.findById(drinkId).get();
         Map<String, String> recipeMap = drink.getRecipe();
-
         ArrayList<Recipe> recipeList = new ArrayList<>();
+
+        //builds a list of Recipe objects to be passed to view.
+        //Recipe object contains 2 String fields: measurement and ingredient name
+        //(original HashMap recipe contained k,v pairs: measurement, ingredientId)
         for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
             Recipe recipe = new Recipe();
             recipe.measurement = entry.getKey();
             int ingredientId = Integer.parseInt(entry.getValue());
             if (ingredientDao.findById(ingredientId).isPresent()) {
                 recipe.ingredientName = ingredientDao.findById(ingredientId).get().getName();
-                System.out.println(recipe.measurement);
-                System.out.println(recipe.ingredientName);
                 recipeList.add(recipe);
             }
         }
-            for (Recipe i : recipeList) {
-                System.out.println(i.measurement);
-                System.out.println(i.ingredientName);
 
-
-        }
-
-        //Creates a list of ingredient names that the view can use (Drink Recipe object returns Ingredient ID, not name)
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
 
@@ -86,14 +80,14 @@ public class DrinkController {
                             @RequestParam Drink.ChillType chillType, @RequestParam String instructions) {
         //build recipe HashMap to add to Drink object
         Map<String, String> recipe = new HashMap<String, String>();
-        recipe.put(measurement1, ingredient1);
-        recipe.put(measurement2, ingredient2);
-        if (!measurement3.isEmpty()){
-            recipe.put(measurement3, ingredient3);
-        }
         if (!measurement4.isEmpty()){
             recipe.put(measurement4, ingredient4);
         }
+        if (!measurement3.isEmpty()){
+            recipe.put(measurement3, ingredient3);
+        }
+        recipe.put(measurement2, ingredient2);
+        recipe.put(measurement1, ingredient1);
 
         Drink newDrink = new Drink();
         newDrink.setName(name);
