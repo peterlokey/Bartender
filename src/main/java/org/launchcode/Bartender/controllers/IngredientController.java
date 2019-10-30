@@ -41,8 +41,16 @@ public class IngredientController {
             return "ingredient/add";
         }
 
+        //TODO: Check for existing ingredient entry
         ingredientDao.save(ingredient);
+        model.addAttribute("ingredientList", ingredientDao.findAll());
 
-        return "index";
+        return "ingredient/index";
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String index (Model model) {
+        model.addAttribute("ingredientList", ingredientDao.findAll());
+        return "ingredient/index";
     }
 }

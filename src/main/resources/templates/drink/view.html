@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h2 th:text="${drink.name}"></h2>
+
+<table>
+    <tr>Glass:  </tr>
+    <tr th:text="${drink.glassType}"></tr>
+    <tr>Mix Method:</tr>
+    <tr th:text="${drink.mixType}"></tr>
+    <tr>Chill Method:</tr>
+    <tr th:text="${drink.chillType}"></tr>
+
+</table>
+<table>
+    <tr th:each="element : ${ingredients}">
+        <td th:text="${element.measurement}"></td>
+        <td th:text="${element.ingredientName}"></td>
+    </tr>
+</table>
+<br>
+<p th:text="${drink.instructions}"></p>
+</body>
+</html>

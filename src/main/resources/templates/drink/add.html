@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" style="max-width:600px;" >
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" name="name"/>
+        <br>
+    <span>
+        <label th:for="glassType">Glass</label>
+        <select name="glassType">
+            <option th:each="glassType : ${glassList}"
+                    th:value = "${glassType}"
+                    th:text = "${glassType}">
+            </option>
+        </select>
+        <label th:for="mixType">Mixing Method</label>
+        <select name="mixType">
+            <option th:each="mixType : ${mixList}"
+                    th:value = "${mixType}"
+                    th:text = "${mixType}">
+            </option>
+        </select>
+        <label th:for="chillType">Chill</label>
+        <select name="chillType">
+            <option th:each="chillType : ${chillList}"
+                    th:value = "${chillType}"
+                    th:text = "${chillType}">
+            </option>
+        </select>
+    </span>
+    </div>
+    <span>
+        <label th:for="measurement">Amount</label>
+        <input class="measurementInput" name="measurement1"/>
+        <label th:for="ingredient">Ingredient</label>
+        <select name="ingredient1">
+            <option th:each="ingredient : ${ingredientList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+
+            </option>
+        </select>
+    </span>
+    <br>
+    <span>
+        <label th:for="measurement">Amount</label>
+        <input class="measurementInput" name="measurement2"/>
+        <label th:for="ingredient">Ingredient</label>
+        <select name="ingredient2">
+            <option th:each="ingredient : ${ingredientList}"
+                    th:value = "${ingredient.id}"
+                    th:text = "${ingredient.name}">
+
+            </option>
+        </select>
+    </span>
+    <br>
+    <span>
+        <label th:for="measurement">Amount</label>
+        <input class="measurementInput" name="measurement3"/>
+        <label th:for="ingredient">Ingredient</label>
+        <select name="ingredient3">
+            <option th:each="ingredient : ${ingredientList}"
+                    th:value = "${ingredient.id}"
+                    th:text = "${ingredient.name}">
+
+            </option>
+        </select>
+    </span>
+    <br>
+    <span>
+        <label th:for="measurement">Amount</label>
+        <input class="measurementInput" name="measurement4"/>
+        <label th:for="ingredient">Ingredient</label>
+        <select name="ingredient4">
+            <option th:each="ingredient : ${ingredientList}"
+                    th:value = "${ingredient.id}"
+                    th:text = "${ingredient.name}">
+
+            </option>
+        </select>
+    </span>
+    <br>
+    <a href="../ingredient/add" id="addIngredientLink">Add Ingredient</a><br>
+    <label th:for="instructions">Instructions</label>
+    <input class="instructionsInput" name="instructions">
+    <input type = "submit" value="Add Drink"/>
+</form>
+
+
+</body>
+</html>

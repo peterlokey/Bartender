@@ -19,7 +19,7 @@ public class Ingredient {
     private Type type;
 
     public enum Type{
-        VODKA, GIN, RUM, TEQUILA, WHISKEY, CORDIAL, WINE, MIXER, GARNISH
+        VODKA, GIN, RUM, TEQUILA, WHISKEY, CORDIAL, WINE, MIXER, BITTERS, GARNISH
     }
 
     public Ingredient (int id, String name, Type type) {
