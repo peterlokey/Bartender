@@ -79,15 +79,16 @@ public class DrinkController {
                             @RequestParam Drink.GlassType glassType, @RequestParam Drink.MixType mixType,
                             @RequestParam Drink.ChillType chillType, @RequestParam String instructions) {
         //build recipe HashMap to add to Drink object
-        Map<String, String> recipe = new HashMap<String, String>();
-        if (!measurement4.isEmpty()){
-            recipe.put(measurement4, ingredient4);
-        }
+        Map<String, String> recipe = new LinkedHashMap<String, String>();
+
+        recipe.put(measurement1, ingredient1);
+        recipe.put(measurement2, ingredient2);
         if (!measurement3.isEmpty()){
             recipe.put(measurement3, ingredient3);
         }
-        recipe.put(measurement2, ingredient2);
-        recipe.put(measurement1, ingredient1);
+        if (!measurement4.isEmpty()){
+            recipe.put(measurement4, ingredient4);
+        }
 
         Drink newDrink = new Drink();
         newDrink.setName(name);

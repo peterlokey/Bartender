@@ -37,6 +37,7 @@
         </select>
     </span>
     </div>
+    <div id="ingredients_wrapper">
     <span>
         <label th:for="measurement">Amount</label>
         <input class="measurementInput" name="measurement1"/>
@@ -58,11 +59,12 @@
             <option th:each="ingredient : ${ingredientList}"
                     th:value = "${ingredient.id}"
                     th:text = "${ingredient.name}">
-
             </option>
         </select>
     </span>
     <br>
+    </div>
+
     <span>
         <label th:for="measurement">Amount</label>
         <input class="measurementInput" name="measurement3"/>
@@ -89,7 +91,7 @@
         </select>
     </span>
     <br>
-    <a href="../ingredient/add" id="addIngredientLink">Add Ingredient</a><br>
+    Ingredient not found? <a href="../ingredient/add" id="addIngredientLink">Add New Ingredient</a><br>
     <label th:for="instructions">Instructions</label>
     <input class="instructionsInput" name="instructions">
     <input type = "submit" value="Add Drink"/>

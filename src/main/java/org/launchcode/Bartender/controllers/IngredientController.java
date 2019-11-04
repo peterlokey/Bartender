@@ -42,6 +42,14 @@ public class IngredientController {
         }
 
         //TODO: Check for existing ingredient entry
+        if (ingredientDao.existsByName(ingredient.getName())){
+            model.addAttribute("title", "Add New Ingredient");
+            model.addAttribute("nameError", "This Ingredient already exists");
+            Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
+            model.addAttribute("typeList", typeList);
+            return "ingredient/add";
+        }
+
         ingredientDao.save(ingredient);
         model.addAttribute("ingredientList", ingredientDao.findAll());
 

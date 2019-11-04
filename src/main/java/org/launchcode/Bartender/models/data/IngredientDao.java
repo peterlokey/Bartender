@@ -10,4 +10,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface IngredientDao extends CrudRepository<Ingredient, Integer> {
 
+    boolean existsByName(String name);
+
 }
