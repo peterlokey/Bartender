@@ -8,7 +8,21 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:each="ingredient : ${ingredientList}" th:text="${ingredient.name}"></p>
+<h2>Vodka</h2>
+<p th:each="item : ${vodkaList}" th:text="${item.name}"></p>
+<h2>Gin</h2>
+<p th:each="item : ${ginList}" th:text="${item.name}"></p>
+<h2>Rum</h2>
+<p th:each="item : ${rumList}" th:text="${item.name}"></p>
+<h2>Tequila</h2>
+<p th:each="item : ${tequilaList}" th:text="${item.name}"></p>
+<h2>Whiskey</h2>
+<p th:each="item : ${whiskeyList}" th:text="${item.name}"></p>
+<h2>Wine</h2>
+<p th:each="item : ${wineList}" th:text="${item.name}"></p>
+<h2>Garnish</h2>
+<p th:each="item : ${garnishList}" th:text="${item.name}"></p>
+
 
 </body>
 </html>
