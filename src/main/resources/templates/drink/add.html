@@ -43,11 +43,49 @@
         <input class="measurementInput" name="measurement1"/>
         <label th:for="ingredient">Ingredient</label>
         <select name="ingredient1">
-            <option th:each="ingredient : ${ingredientList}"
+            <optgroup label="Vodka">
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option th:each="ingredient : ${vodkaList}"
+                            th:value = "${ingredient.id}"
+                            th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Gin">
+                <option th:each="ingredient : ${ginList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
-
-            </option>
+                </option>
+            </optgroup>
+            <optgroup label="Rum">
+                <option th:each="ingredient : ${rumList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Tequila">
+                <option th:each="ingredient : ${tequilaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Whiskey">
+                <option th:each="ingredient : ${whiskeyList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Wine">
+                <option th:each="ingredient : ${winelist}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Garnish">
+                <option th:each="ingredient : ${garnishList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
         </select>
     </span>
     <br>
@@ -56,10 +94,49 @@
         <input class="measurementInput" name="measurement2"/>
         <label th:for="ingredient">Ingredient</label>
         <select name="ingredient2">
-            <option th:each="ingredient : ${ingredientList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
+            <optgroup label="Vodka">
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option th:each="ingredient : ${vodkaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Gin">
+                <option th:each="ingredient : ${ginList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Rum">
+                <option th:each="ingredient : ${rumList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Tequila">
+                <option th:each="ingredient : ${tequilaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Whiskey">
+                <option th:each="ingredient : ${whiskeyList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Wine">
+                <option th:each="ingredient : ${winelist}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Garnish">
+                <option th:each="ingredient : ${garnishList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
         </select>
     </span>
     <br>
@@ -70,11 +147,49 @@
         <input class="measurementInput" name="measurement3"/>
         <label th:for="ingredient">Ingredient</label>
         <select name="ingredient3">
-            <option th:each="ingredient : ${ingredientList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-
-            </option>
+            <optgroup label="Vodka">
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option th:each="ingredient : ${vodkaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Gin">
+                <option th:each="ingredient : ${ginList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Rum">
+                <option th:each="ingredient : ${rumList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Tequila">
+                <option th:each="ingredient : ${tequilaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Whiskey">
+                <option th:each="ingredient : ${whiskeyList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Wine">
+                <option th:each="ingredient : ${winelist}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Garnish">
+                <option th:each="ingredient : ${garnishList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
         </select>
     </span>
     <br>
@@ -83,11 +198,49 @@
         <input class="measurementInput" name="measurement4"/>
         <label th:for="ingredient">Ingredient</label>
         <select name="ingredient4">
-            <option th:each="ingredient : ${ingredientList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-
-            </option>
+            <optgroup label="Vodka">
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option th:each="ingredient : ${vodkaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Gin">
+                <option th:each="ingredient : ${ginList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Rum">
+                <option th:each="ingredient : ${rumList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Tequila">
+                <option th:each="ingredient : ${tequilaList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Whiskey">
+                <option th:each="ingredient : ${whiskeyList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Wine">
+                <option th:each="ingredient : ${winelist}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Garnish">
+                <option th:each="ingredient : ${garnishList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
         </select>
     </span>
     <br>

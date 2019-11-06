@@ -1,6 +1,7 @@
 package org.launchcode.Bartender.controllers;
 
 import org.launchcode.Bartender.models.Drink;
+import org.launchcode.Bartender.models.Ingredient;
 import org.launchcode.Bartender.models.Recipe;
 import org.launchcode.Bartender.models.data.DrinkDao;
 import org.launchcode.Bartender.models.data.IngredientDao;
@@ -60,11 +61,20 @@ public class DrinkController {
         Drink.GlassType[] glassList = org.launchcode.Bartender.models.Drink.GlassType.values();
         Drink.MixType[] mixList = org.launchcode.Bartender.models.Drink.MixType.values();
         Drink.ChillType[] chillList = org.launchcode.Bartender.models.Drink.ChillType.values();
+        Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
+        model.addAttribute("typeList", typeList);
         model.addAttribute("glassList", glassList);
         model.addAttribute("mixList", mixList);
         model.addAttribute("chillList", chillList);
-        model.addAttribute("ingredientList", ingredientDao.findAll() );
+        model.addAttribute("ingredientList", ingredientDao.findAll() ); //TODO delete this line after type sorting
         model.addAttribute("title", "Add A New Drink Recipe");
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
 
 
         return "drink/add";
@@ -99,6 +109,17 @@ public class DrinkController {
         newDrink.setMixType(mixType);
         drinkDao.save(newDrink);
         return "redirect:";
+    }
+
+    public List<Ingredient> generateTypeList(Ingredient.Type type){
+        Iterable<Ingredient> ingredients = ingredientDao.findAll();
+        List<Ingredient> typeList = new ArrayList<Ingredient>();
+        for (Ingredient i : ingredients){
+            if (i.getType().equals(type)){
+                typeList.add(i);
+            }
+        }
+        return typeList;
     }
 
 }

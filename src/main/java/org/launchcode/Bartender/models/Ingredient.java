@@ -55,3 +55,5 @@ public class Ingredient {
         this.type = type;
     }
 }
+
+

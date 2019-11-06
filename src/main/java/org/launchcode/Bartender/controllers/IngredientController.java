@@ -29,6 +29,7 @@ public class IngredientController {
         model.addAttribute("ingredient", new Ingredient());
         model.addAttribute("title", "Add New Ingredient");
 
+
         return "ingredient/add";
     }
 
@@ -68,7 +69,8 @@ public class IngredientController {
         model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
         model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WHISKEY));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
 
 
