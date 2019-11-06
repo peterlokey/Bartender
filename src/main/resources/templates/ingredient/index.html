@@ -7,7 +7,8 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-
+<br><br>
+<a href="ingredient/add">Add New Ingredient</a>
 <h2>Vodka</h2>
 <p th:each="item : ${vodkaList}" th:text="${item.name}"></p>
 <h2>Gin</h2>
