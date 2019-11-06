@@ -117,7 +117,7 @@ public class UserController {
             return "user/login";
         }
 
-        //TODO: Implement Session for logged-in user
+
         HttpSession session = request.getSession();
         session.setAttribute("name", user.getName());
 
