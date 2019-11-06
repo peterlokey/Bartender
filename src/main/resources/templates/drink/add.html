@@ -37,6 +37,7 @@
         </select>
     </span>
     </div>
+    <!--TODO: Create loop to clean up this code and make it less repetitive-->
     <div id="ingredients_wrapper">
     <span>
         <label th:for="measurement">Amount</label>
@@ -75,7 +76,7 @@
                 </option>
             </optgroup>
             <optgroup label="Wine">
-                <option th:each="ingredient : ${winelist}"
+                <option th:each="ingredient : ${wineList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
                 </option>
@@ -126,7 +127,7 @@
                 </option>
             </optgroup>
             <optgroup label="Wine">
-                <option th:each="ingredient : ${winelist}"
+                <option th:each="ingredient : ${wineList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
                 </option>
@@ -179,7 +180,7 @@
                 </option>
             </optgroup>
             <optgroup label="Wine">
-                <option th:each="ingredient : ${winelist}"
+                <option th:each="ingredient : ${wineList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
                 </option>
@@ -230,7 +231,7 @@
                 </option>
             </optgroup>
             <optgroup label="Wine">
-                <option th:each="ingredient : ${winelist}"
+                <option th:each="ingredient : ${wineList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
                 </option>

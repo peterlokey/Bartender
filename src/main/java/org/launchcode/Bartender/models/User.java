@@ -26,6 +26,8 @@ public class User {
     @NotNull
     private String password;
 
+    private ArrayList<Integer> myBar;
+
     public User (int id, String name, String email, String password) {
         this();
         this.id = id;
@@ -68,6 +70,12 @@ public class User {
         this.password = password;
     }
 
+    public ArrayList<Integer> getMyBar() {
+        return myBar;
+    }
 
+    public void setMyBar(ArrayList<Integer> myBar) {
+        this.myBar = myBar;
+    }
 }
 

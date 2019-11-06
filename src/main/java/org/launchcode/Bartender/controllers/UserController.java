@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Null;
 import java.util.ArrayList;
@@ -93,7 +95,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(Model model, @RequestParam String email, @RequestParam String password) {
+    public String login(Model model, @RequestParam String email, @RequestParam String password, HttpServletRequest request) {
         int userId = 0;
         boolean found = false;
         for (User user : userDao.findAll()) {
@@ -116,9 +118,18 @@ public class UserController {
         }
 
         //TODO: Implement Session for logged-in user
-        model.addAttribute("name", user.getName());
+        HttpSession session = request.getSession();
+        session.setAttribute("name", user.getName());
+
+        //model.addAttribute("name", user.getName());
         return "user/index";
 
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String login(HttpSession session){
+        session.invalidate();
+        return "index";
     }
 
 }
