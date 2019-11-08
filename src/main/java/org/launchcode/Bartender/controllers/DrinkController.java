@@ -66,7 +66,6 @@ public class DrinkController {
         model.addAttribute("glassList", glassList);
         model.addAttribute("mixList", mixList);
         model.addAttribute("chillList", chillList);
-        model.addAttribute("ingredientList", ingredientDao.findAll() ); //TODO delete this line after type sorting
         model.addAttribute("title", "Add A New Drink Recipe");
         model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
         model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));

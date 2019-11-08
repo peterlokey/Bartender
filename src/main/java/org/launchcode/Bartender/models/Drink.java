@@ -3,7 +3,6 @@ package org.launchcode.Bartender.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

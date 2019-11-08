@@ -3,8 +3,6 @@ package org.launchcode.Bartender.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

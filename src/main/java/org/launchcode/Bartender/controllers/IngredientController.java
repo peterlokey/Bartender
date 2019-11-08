@@ -44,7 +44,7 @@ public class IngredientController {
             return "ingredient/add";
         }
 
-        //TODO: Check for existing ingredient entry
+        //checks for existing ingredient
         if (ingredientDao.existsByName(ingredient.getName())){
             model.addAttribute("title", "Add New Ingredient");
             model.addAttribute("nameError", "This Ingredient already exists");
@@ -78,6 +78,7 @@ public class IngredientController {
         return "ingredient/index";
     }
 
+    //TODO: DRY this code- this function is repeated in multiple controllers.
     public List<Ingredient> generateTypeList(Ingredient.Type type){
         Iterable<Ingredient> ingredients = ingredientDao.findAll();
         List<Ingredient> typeList = new ArrayList<Ingredient>();
