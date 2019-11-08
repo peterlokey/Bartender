@@ -9,6 +9,8 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <form method="post" style="max-width:600px;" >
+    <input type="hidden" name="ingredient3" id="ingredient3" value=""/>
+    <input type="hidden" name="ingredient4" id="ingredient4" value=""/>
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" name="name"/>
@@ -81,6 +83,18 @@
                         th:text = "${ingredient.name}">
                 </option>
             </optgroup>
+            <optgroup label="Bitters">
+                <option th:each="ingredient : ${bittersList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+                        <optgroup label="Mixer">
+                <option th:each="ingredient : ${mixerList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
             <optgroup label="Garnish">
                 <option th:each="ingredient : ${garnishList}"
                         th:value = "${ingredient.id}"
@@ -128,6 +142,18 @@
             </optgroup>
             <optgroup label="Wine">
                 <option th:each="ingredient : ${wineList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Bitters">
+                <option th:each="ingredient : ${bittersList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+                        <optgroup label="Mixer">
+                <option th:each="ingredient : ${mixerList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
                 </option>
@@ -185,6 +211,18 @@
                         th:text = "${ingredient.name}">
                 </option>
             </optgroup>
+            <optgroup label="Bitters">
+                <option th:each="ingredient : ${bittersList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+                        <optgroup label="Mixer">
+                <option th:each="ingredient : ${mixerList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
             <optgroup label="Garnish">
                 <option th:each="ingredient : ${garnishList}"
                         th:value = "${ingredient.id}"
@@ -232,6 +270,18 @@
             </optgroup>
             <optgroup label="Wine">
                 <option th:each="ingredient : ${wineList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+            <optgroup label="Bitters">
+                <option th:each="ingredient : ${bittersList}"
+                        th:value = "${ingredient.id}"
+                        th:text = "${ingredient.name}">
+                </option>
+            </optgroup>
+                        <optgroup label="Mixer">
+                <option th:each="ingredient : ${mixerList}"
                         th:value = "${ingredient.id}"
                         th:text = "${ingredient.name}">
                 </option>

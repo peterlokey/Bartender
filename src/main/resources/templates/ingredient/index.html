@@ -7,8 +7,11 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-<br><br>
-<a href="add">Add New Ingredient</a>
+<br>
+<h5 th:text="${message}" id="error-message"></h5>
+<br>
+
+<a th:if="${session.name}" href="add">Add New Ingredient</a>
 <h2>Vodka</h2>
 <p th:each="item : ${vodkaList}" th:text="${item.name}"></p>
 <h2>Gin</h2>
@@ -21,6 +24,10 @@
 <p th:each="item : ${whiskeyList}" th:text="${item.name}"></p>
 <h2>Wine</h2>
 <p th:each="item : ${wineList}" th:text="${item.name}"></p>
+<h2>Mixer</h2>
+<p th:each="item : ${mixerList}" th:text="${item.name}"></p>
+<h2>Bitters</h2>
+<p th:each="item : ${bittersList}" th:text="${item.name}"></p>
 <h2>Garnish</h2>
 <p th:each="item : ${garnishList}" th:text="${item.name}"></p>
 

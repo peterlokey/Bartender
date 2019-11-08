@@ -15,9 +15,9 @@
     <a href="/">Home</a> |
     <a th:if="${session.isEmpty()}" href="/user/login">Log In</a>
     <a th:if="${session.name}" href="/user/logout">Log Out</a> |
-    <a href="/user/signup">Sign Up</a> |         |
+    <a th:if="${session.isEmpty()}" href="/user/signup">Sign Up</a> |         |
     <a href="/drink/">Drink List</a> |
-    <a href="/drink/add">Add Drink</a> |         |
+    <a th:if="${session.name}" href="/drink/add">Add Drink</a> |         |
     <a href="/ingredient/">Ingredients</a> |
     <a th:if="${session.name}" href="/user">My Bar</a>
 

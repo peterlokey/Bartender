@@ -8,6 +8,8 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<h5 th:text="${message}" id="error-message"></h5>
+
 <ul>
     <li th:each="drink : ${drinkList}">
         <a th:href="'view/'+${drink.id}" th:text="${drink.name}"></a>

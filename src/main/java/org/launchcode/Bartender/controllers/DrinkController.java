@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -56,7 +58,17 @@ public class DrinkController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String addDrink (Model model) {
+    public String addDrink (Model model, HttpServletRequest request) {
+        //check for logged-in user
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        if (name == null){
+            model.addAttribute("title", "Drink List");
+            model.addAttribute("message", "Only Logged-In Users may add drinks");
+            model.addAttribute("drinkList", drinkDao.findAll());
+            return "drink/index";
+        }
+
         //populate lists for glass types, mix types, and chill types
         Drink.GlassType[] glassList = org.launchcode.Bartender.models.Drink.GlassType.values();
         Drink.MixType[] mixList = org.launchcode.Bartender.models.Drink.MixType.values();
@@ -73,6 +85,8 @@ public class DrinkController {
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
 
 
@@ -90,14 +104,17 @@ public class DrinkController {
         //build recipe HashMap to add to Drink object
         Map<String, String> recipe = new LinkedHashMap<String, String>();
 
-        recipe.put(measurement1, ingredient1);
-        recipe.put(measurement2, ingredient2);
-        if (!measurement3.isEmpty()){
-            recipe.put(measurement3, ingredient3);
-        }
         if (!measurement4.isEmpty()){
             recipe.put(measurement4, ingredient4);
         }
+        if (!measurement3.isEmpty()){
+            recipe.put(measurement3, ingredient3);
+        }
+        recipe.put(measurement2, ingredient2);
+        recipe.put(measurement1, ingredient1);
+
+
+
 
         Drink newDrink = new Drink();
         newDrink.setName(name);

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,27 @@ public class IngredientController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String addIngredient (Model model) {
+    public String addIngredient (Model model, HttpServletRequest request) {
+        //check for logged-in user
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        if (name == null){
+            model.addAttribute("title", "Ingredient List");
+            model.addAttribute("message", "Only Logged-In Users may add ingredients");
+            Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
+            model.addAttribute("typeList", typeList);
+            model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
+            model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
+            model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
+            model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
+            model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
+            model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+            model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
+            model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
+            model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+            return "ingredient/index";
+        }
+
         Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
         model.addAttribute("typeList", typeList);
         model.addAttribute("ingredient", new Ingredient());
@@ -50,12 +72,30 @@ public class IngredientController {
             model.addAttribute("nameError", "This Ingredient already exists");
             Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
             model.addAttribute("typeList", typeList);
+            model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
+            model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
+            model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
+            model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
+            model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
+            model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+            model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
+            model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
+            model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
             return "ingredient/add";
         }
 
         ingredientDao.save(ingredient);
-        model.addAttribute("ingredientList", ingredientDao.findAll());
 
+        model.addAttribute("ingredientList", ingredientDao.findAll());
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
         return "ingredient/index";
     }
 
@@ -71,6 +111,8 @@ public class IngredientController {
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
 
 
