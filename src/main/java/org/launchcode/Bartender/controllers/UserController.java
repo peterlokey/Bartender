@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO : To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
+//TODO: perform Session check at views that should only be accessible by logged-in users
 
 @Controller
 @RequestMapping(value = "user")
@@ -161,7 +162,7 @@ public class UserController {
             userDao.save(user);
         }
         model.addAttribute("myBar", user.getMyBar());
-        return "user/index";
+        return "redirect:..";
     }
 
     @RequestMapping(value = "")
