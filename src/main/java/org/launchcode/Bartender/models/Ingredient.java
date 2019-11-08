@@ -3,6 +3,9 @@ package org.launchcode.Bartender.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Ingredient {
@@ -28,6 +31,9 @@ public class Ingredient {
         this.name = name;
         this.type = type;
     }
+
+    @ManyToMany(mappedBy = "myBar")
+    private List<User> users;
 
     public Ingredient() {}
 

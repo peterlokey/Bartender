@@ -18,7 +18,8 @@
     <a href="/user/signup">Sign Up</a> |         |
     <a href="/drink/">Drink List</a> |
     <a href="/drink/add">Add Drink</a> |         |
-    <a href="/ingredient/">Ingredients</a>
+    <a href="/ingredient/">Ingredients</a> |
+    <a th:if="${session.name}" href="/user">My Bar</a>
 
 
 </nav>

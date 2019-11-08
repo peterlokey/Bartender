@@ -1,11 +1,9 @@
 package org.launchcode.Bartender.models;
 
-import org.launchcode.Bartender.models.data.UserDao;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -26,7 +24,8 @@ public class User {
     @NotNull
     private String password;
 
-    private ArrayList<Integer> myBar;
+    @ManyToMany
+    private List<Ingredient> myBar;
 
     public User (int id, String name, String email, String password) {
         this();
@@ -34,6 +33,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+
     }
 
     public User() {}
@@ -70,12 +70,16 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Integer> getMyBar() {
+    public List<Ingredient> getMyBar() {
         return myBar;
     }
 
-    public void setMyBar(ArrayList<Integer> myBar) {
+    public void setMyBar(List<Ingredient> myBar) {
         this.myBar = myBar;
+    }
+
+    public void addToMyBar(Ingredient ingredient){
+        this.myBar.add(ingredient);
     }
 }
 

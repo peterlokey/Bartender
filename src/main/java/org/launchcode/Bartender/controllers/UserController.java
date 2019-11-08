@@ -1,10 +1,11 @@
 package org.launchcode.Bartender.controllers;
 
+import org.launchcode.Bartender.models.Ingredient;
 import org.launchcode.Bartender.models.User;
+import org.launchcode.Bartender.models.data.IngredientDao;
 import org.launchcode.Bartender.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
+import java.util.List;
 
 //TODO : To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
 
@@ -25,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private IngredientDao ingredientDao;
 
     @RequestMapping(value = "signup", method = RequestMethod.GET)
     public String signUp(Model model) {
@@ -120,9 +123,9 @@ public class UserController {
 
         HttpSession session = request.getSession();
         session.setAttribute("name", user.getName());
+        model.addAttribute("myBar", user.getMyBar());
 
-        //model.addAttribute("name", user.getName());
-        return "user/index";
+        return "redirect:";
 
     }
 
@@ -132,4 +135,64 @@ public class UserController {
         return "index";
     }
 
+    @RequestMapping(value = "mybar/add", method = RequestMethod.GET)
+    public String addToMyBar(Model model){
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+
+        return "user/add-ingredient";
+    }
+
+    @RequestMapping(value = "mybar/add", method = RequestMethod.POST)
+    public String addToMyBar(HttpServletRequest request, Model model, @RequestParam Ingredient ingredient){
+        HttpSession session=request.getSession(false);
+        String name = (String)session.getAttribute("name");
+        User user = findByName(name);
+        if (user.getMyBar() == null) {
+            user.setMyBar(new ArrayList<>());
+        }
+        if(! user.getMyBar().contains(ingredient)){
+            user.addToMyBar(ingredient);
+            userDao.save(user);
+        }
+        model.addAttribute("myBar", user.getMyBar());
+        return "user/index";
+    }
+
+    @RequestMapping(value = "")
+    public String index(HttpServletRequest request, Model model){
+        HttpSession session=request.getSession(false);
+        String name = (String)session.getAttribute("name");
+        User user = findByName(name);
+
+        model.addAttribute("myBar", user.getMyBar());
+        return "user/index";
+    }
+
+
+    public List<Ingredient> generateTypeList(Ingredient.Type type){
+        Iterable<Ingredient> ingredients = ingredientDao.findAll();
+        List<Ingredient> typeList = new ArrayList<Ingredient>();
+        for (Ingredient i : ingredients){
+            if (i.getType().equals(type)){
+                typeList.add(i);
+            }
+        }
+        return typeList;
+    }
+
+    public User findByName(String name){
+
+        for (User user : userDao.findAll()){
+            if(user.getName().equals(name)){
+                return user;
+            }
+        }
+        return null;
+    }
 }
