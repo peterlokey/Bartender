@@ -36,12 +36,12 @@ public class DrinkController {
 
         Drink drink = drinkDao.findById(drinkId).get();
         Map<String, String> recipeMap = drink.getRecipe();
-        ArrayList<Recipe> recipeList = new ArrayList<>();
+        ArrayList<Recipe> recipeList = createSortedRecipeList(recipeMap);
 
         //builds a list of Recipe objects to be passed to view.
         //Recipe object contains 2 String fields: measurement and ingredient name
         //(original HashMap recipe contained k,v pairs: measurement, ingredientId)
-        for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
+        /*for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
             Recipe recipe = new Recipe();
             recipe.measurement = entry.getKey();
             int ingredientId = Integer.parseInt(entry.getValue());
@@ -49,7 +49,21 @@ public class DrinkController {
                 recipe.ingredientName = ingredientDao.findById(ingredientId).get().getName();
                 recipeList.add(recipe);
             }
+        }*/
+        //convert HashMap<String, Ingredient> to ArrayList<String>
+        /*ArrayList<String> recipeStrings = new ArrayList<>();
+        for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
+            String str = entry.getKey() + " ";
+            int ingredientId = Integer.parseInt(entry.getValue());
+            if (ingredientDao.findById(ingredientId).isPresent()) {
+                str += ingredientDao.findById(ingredientId).get().getName();
+                recipeStrings.add(str);
+            }
         }
+        Collections.sort(recipeStrings);
+        for (String i : recipeStrings){
+            System.out.println(i);
+        }*/
 
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
@@ -104,18 +118,14 @@ public class DrinkController {
         //build recipe HashMap to add to Drink object
         Map<String, String> recipe = new LinkedHashMap<String, String>();
 
-        if (!measurement4.isEmpty()){
-            recipe.put(measurement4, ingredient4);
-        }
+        recipe.put(measurement1, ingredient1);
+        recipe.put(measurement2, ingredient2);
         if (!measurement3.isEmpty()){
             recipe.put(measurement3, ingredient3);
         }
-        recipe.put(measurement2, ingredient2);
-        recipe.put(measurement1, ingredient1);
-
-
-
-
+        if (!measurement4.isEmpty()){
+            recipe.put(measurement4, ingredient4);
+        }
         Drink newDrink = new Drink();
         newDrink.setName(name);
         newDrink.setRecipe(recipe);
@@ -136,6 +146,28 @@ public class DrinkController {
             }
         }
         return typeList;
+    }
+
+    public ArrayList<Recipe> createSortedRecipeList(Map<String,String> recipeMap){
+        ArrayList<Recipe> recipeList = new ArrayList<>();
+        for (Ingredient.Type t : Ingredient.Type.values()){
+            for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
+                //call ingredient object
+                int ingredientId = Integer.parseInt(entry.getValue());
+                Ingredient ingredient = ingredientDao.findById(ingredientId).get();
+                //check if ingredient type matches iteration type
+                if (ingredient.getType().equals(t)) {
+                    Recipe recipe = new Recipe();
+                    recipe.measurement = entry.getKey();
+                    //add Recipe object to List if type matches iteration type
+                    if (ingredientDao.findById(ingredientId).isPresent()) {
+                        recipe.ingredientName = ingredientDao.findById(ingredientId).get().getName();
+                        recipeList.add(recipe);
+                    }
+                }
+            }
+        }
+        return recipeList;
     }
 
 }
