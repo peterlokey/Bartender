@@ -6,6 +6,8 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<!--TODO: Create fragment to populate ingredient drop-down menu on multiple views -->
+
 <form method="post" style="max-width:600px;" >
     <label th:for="ingredient">Add Ingredient to "My Bar"</label>
     <select name="ingredient" id="ingredient">
@@ -42,6 +44,18 @@
         </optgroup>
         <optgroup label="Wine">
             <option th:each="ingredient : ${wineList}"
+                    th:value = "${ingredient.id}"
+                    th:text = "${ingredient.name}">
+            </option>
+        </optgroup>
+        <optgroup label="Bitters">
+            <option th:each="ingredient : ${bittersList}"
+                    th:value = "${ingredient.id}"
+                    th:text = "${ingredient.name}">
+            </option>
+        </optgroup>
+        <optgroup label="Mixer">
+            <option th:each="ingredient : ${mixerList}"
                     th:value = "${ingredient.id}"
                     th:text = "${ingredient.name}">
             </option>

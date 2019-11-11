@@ -8,10 +8,13 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post">
-    <input id="searchTerm" name="searchTerm" />
-    <input type="submit" />
-</form>
+<span>
+    <form method="post">
+        <input id="searchTerm" name="searchTerm" />
+        <input type="submit" />
+    </form>
+    <a th:if="${session.name}" href="search/mybar">Find Drinks using My Bar ingredients</a>
+</span>
 
 <div th:if="${searchResults} and ${searchResults.size()}">
     <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>

@@ -144,6 +144,8 @@ public class UserController {
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
 
         return "user/add-ingredient";
