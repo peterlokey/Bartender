@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post">
+    <input id="searchTerm" name="searchTerm" />
+    <input type="submit" />
+</form>
+
+<div th:if="${searchResults} and ${searchResults.size()}">
+    <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>
+    <ul>
+        <li th:each="drink : ${searchResults}">
+            <a th:href="'drink/view/'+${drink.id}" th:text="${drink.name}"></a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
