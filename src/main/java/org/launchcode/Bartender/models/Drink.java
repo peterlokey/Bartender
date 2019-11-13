@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -38,6 +39,9 @@ public class Drink {
     public enum MixType {
         SHAKE, STIR, BUILD
     }
+
+    @ManyToMany(mappedBy = "drinks")
+    private List<User> users;
 
     public Drink (int id, String name, Map<String, String> recipe, String instructions, GlassType glassType,
                   ChillType chillType, MixType mixType){
@@ -107,7 +111,9 @@ public class Drink {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
 
-
+    public List<User> getUsers() {
+        return users;
     }
 }

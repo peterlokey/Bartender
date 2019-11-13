@@ -3,8 +3,10 @@ package org.launchcode.Bartender.controllers;
 import org.launchcode.Bartender.models.Drink;
 import org.launchcode.Bartender.models.Ingredient;
 import org.launchcode.Bartender.models.Recipe;
+import org.launchcode.Bartender.models.User;
 import org.launchcode.Bartender.models.data.DrinkDao;
 import org.launchcode.Bartender.models.data.IngredientDao;
+import org.launchcode.Bartender.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ public class DrinkController {
     private DrinkDao drinkDao;
     @Autowired
     private IngredientDao ingredientDao;
+    @Autowired
+    private UserDao userDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index (Model model) {
@@ -37,33 +41,6 @@ public class DrinkController {
         Drink drink = drinkDao.findById(drinkId).get();
         Map<String, String> recipeMap = drink.getRecipe();
         ArrayList<Recipe> recipeList = createSortedRecipeList(recipeMap);
-
-        //builds a list of Recipe objects to be passed to view.
-        //Recipe object contains 2 String fields: measurement and ingredient name
-        //(original HashMap recipe contained k,v pairs: measurement, ingredientId)
-        /*for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
-            Recipe recipe = new Recipe();
-            recipe.measurement = entry.getKey();
-            int ingredientId = Integer.parseInt(entry.getValue());
-            if (ingredientDao.findById(ingredientId).isPresent()) {
-                recipe.ingredientName = ingredientDao.findById(ingredientId).get().getName();
-                recipeList.add(recipe);
-            }
-        }*/
-        //convert HashMap<String, Ingredient> to ArrayList<String>
-        /*ArrayList<String> recipeStrings = new ArrayList<>();
-        for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
-            String str = entry.getKey() + " ";
-            int ingredientId = Integer.parseInt(entry.getValue());
-            if (ingredientDao.findById(ingredientId).isPresent()) {
-                str += ingredientDao.findById(ingredientId).get().getName();
-                recipeStrings.add(str);
-            }
-        }
-        Collections.sort(recipeStrings);
-        for (String i : recipeStrings){
-            System.out.println(i);
-        }*/
 
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
@@ -137,6 +114,29 @@ public class DrinkController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "favorite")
+    public String addToFavorites (Model model, HttpServletRequest request, @RequestParam String drinkId){
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        User user = findUserByName(name);
+        Drink drink = drinkDao.findById(Integer.parseInt(drinkId)).get();
+
+        if (user.getDrinks() == null) {
+            user.setDrinks(new ArrayList<>());
+        }
+        if(! user.getDrinks().contains(drink)){
+            System.out.println("check");
+            user.addToDrinks(drink);
+            userDao.save(user);
+        }
+        Map<String, String> recipeMap = drink.getRecipe();
+        ArrayList<Recipe> recipeList = createSortedRecipeList(recipeMap);
+        model.addAttribute("ingredients", recipeList);
+        model.addAttribute("drink", drink);
+
+        return "drink/view";
+    }
+
     public List<Ingredient> generateTypeList(Ingredient.Type type){
         Iterable<Ingredient> ingredients = ingredientDao.findAll();
         List<Ingredient> typeList = new ArrayList<Ingredient>();
@@ -147,6 +147,7 @@ public class DrinkController {
         }
         return typeList;
     }
+
 
     public ArrayList<Recipe> createSortedRecipeList(Map<String,String> recipeMap){
         ArrayList<Recipe> recipeList = new ArrayList<>();
@@ -170,4 +171,12 @@ public class DrinkController {
         return recipeList;
     }
 
+    public User findUserByName (String name) {
+        for (User u : userDao.findAll()){
+            if (u.getName().equals(name)){
+                return u;
+            }
+        }
+        return null;
+    }
 }

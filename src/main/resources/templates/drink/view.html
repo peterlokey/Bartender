@@ -8,6 +8,11 @@
 
 <h2 th:text="${drink.name}"></h2>
 
+<form action="../favorite" th:object="${drink}">
+    <input type="hidden" th:name="drinkId" th:value="*{id}" />
+    <input type="submit" value="Add To Favorites" />
+</form>
+<br><br>
 <table>
     <tr>Glass:  </tr>
     <tr th:text="${drink.glassType}"></tr>

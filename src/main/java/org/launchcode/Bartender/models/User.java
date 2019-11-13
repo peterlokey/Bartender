@@ -27,6 +27,9 @@ public class User {
     @ManyToMany
     private List<Ingredient> myBar;
 
+    @ManyToMany
+    private List<Drink> drinks;
+
     public User (int id, String name, String email, String password) {
         this();
         this.id = id;
@@ -80,6 +83,18 @@ public class User {
 
     public void addToMyBar(Ingredient ingredient){
         this.myBar.add(ingredient);
+    }
+
+    public List<Drink> getDrinks() {
+        return drinks;
+    }
+
+    public void setDrinks(List<Drink> drinks) {
+        this.drinks = drinks;
+    }
+
+    public void addToDrinks(Drink drink) {
+        this.drinks.add(drink);
     }
 }
 
