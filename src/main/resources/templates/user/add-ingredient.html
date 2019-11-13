@@ -6,67 +6,9 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<!--TODO: Create fragment to populate ingredient drop-down menu on multiple views -->
-
 <form method="post" style="max-width:600px;" >
     <label th:for="ingredient">Add Ingredient to "My Bar"</label>
-    <select name="ingredient" id="ingredient">
-        <optgroup label="Vodka">
-            <option selected disabled hidden style='display: none' value=''></option>
-            <option th:each="ingredient : ${vodkaList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Gin">
-            <option th:each="ingredient : ${ginList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Rum">
-            <option th:each="ingredient : ${rumList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Tequila">
-            <option th:each="ingredient : ${tequilaList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Whiskey">
-            <option th:each="ingredient : ${whiskeyList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Wine">
-            <option th:each="ingredient : ${wineList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Bitters">
-            <option th:each="ingredient : ${bittersList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Mixer">
-            <option th:each="ingredient : ${mixerList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-        <optgroup label="Garnish">
-            <option th:each="ingredient : ${garnishList}"
-                    th:value = "${ingredient.id}"
-                    th:text = "${ingredient.name}">
-            </option>
-        </optgroup>
-    </select>
+    <select  th:replace="fragments :: dropdown(name='ingredient')"></select>
 
     <input type="submit" value="Add" />
 </form>

@@ -24,6 +24,64 @@
 
 
 </nav>
+<!--TODO: Could a loop be used to DRY this up? -->
+<select th:fragment="dropdown" th:name="${name}">
+    <optgroup label="Vodka">
+        <option selected disabled hidden style='display: none' value=''></option>
+        <option th:each="ingredient : ${vodkaList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Gin">
+        <option th:each="ingredient : ${ginList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Rum">
+        <option th:each="ingredient : ${rumList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Tequila">
+        <option th:each="ingredient : ${tequilaList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Whiskey">
+        <option th:each="ingredient : ${whiskeyList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Wine">
+        <option th:each="ingredient : ${wineList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Bitters">
+        <option th:each="ingredient : ${bittersList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Mixer">
+        <option th:each="ingredient : ${mixerList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+    <optgroup label="Garnish">
+        <option th:each="ingredient : ${garnishList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
+</select>
 
 </body>
 </html>
