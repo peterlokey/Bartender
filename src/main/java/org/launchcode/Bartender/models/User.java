@@ -96,5 +96,9 @@ public class User {
     public void addToDrinks(Drink drink) {
         this.drinks.add(drink);
     }
+
+    public void removeFromDrinks(Drink drink) {
+        this.drinks.remove(drink);
+    }
 }
 

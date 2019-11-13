@@ -8,9 +8,13 @@
 
 <h2 th:text="${drink.name}"></h2>
 
-<form action="../favorite" th:object="${drink}">
+<form th:if="${session.name}" action="../favorite" th:object="${drink}">
     <input type="hidden" th:name="drinkId" th:value="*{id}" />
-    <input type="submit" value="Add To Favorites" />
+    <input th:if="!${favorited}"type="submit" value="Add To Favorites" />
+</form>
+<form th:if="${session.name}" action="../favorite/remove" th:object="${drink}">
+    <input type="hidden" th:name="drinkId" th:value="*{id}" />
+    <input th:if="${favorited}"type="submit" value="Remove From Favorites" />
 </form>
 <br><br>
 <table>

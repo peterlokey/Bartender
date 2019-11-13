@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
+//TODO: I need to put in some redirects somewhere. Getting mapping errors after multiple navigation clicks
+
 @Controller
 @RequestMapping(value = "drink")
 public class DrinkController {
@@ -36,11 +38,20 @@ public class DrinkController {
     }
 
     @RequestMapping(value="view/{drinkId}", method = RequestMethod.GET)
-    public String displayRecipe(Model model, @PathVariable("drinkId")  int drinkId) {
+    public String displayRecipe(Model model, HttpServletRequest request, @PathVariable("drinkId")  int drinkId) {
 
         Drink drink = drinkDao.findById(drinkId).get();
         Map<String, String> recipeMap = drink.getRecipe();
         ArrayList<Recipe> recipeList = createSortedRecipeList(recipeMap);
+
+        HttpSession session=request.getSession(false);
+        if (session != null) {
+            String name = (String) session.getAttribute("name");
+            User user = findByName(name);
+            if (user.getDrinks().contains(drink)) {
+                model.addAttribute("favorited", true);
+            }
+        }
 
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
@@ -125,18 +136,38 @@ public class DrinkController {
             user.setDrinks(new ArrayList<>());
         }
         if(! user.getDrinks().contains(drink)){
-            System.out.println("check");
             user.addToDrinks(drink);
             userDao.save(user);
         }
         Map<String, String> recipeMap = drink.getRecipe();
         ArrayList<Recipe> recipeList = createSortedRecipeList(recipeMap);
+
+        model.addAttribute("favorited", true);
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
 
         return "drink/view";
     }
 
+    @RequestMapping(value = "favorite/remove")
+    public String removeFromFavorites (Model model, HttpServletRequest request, @RequestParam String drinkId){
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        User user = findUserByName(name);
+        Drink drink = drinkDao.findById(Integer.parseInt(drinkId)).get();
+
+        user.removeFromDrinks(drink);
+        userDao.save(user);
+
+        Map<String, String> recipeMap = drink.getRecipe();
+        ArrayList<Recipe> recipeList = createSortedRecipeList(recipeMap);
+
+        model.addAttribute("favorited", false);
+        model.addAttribute("ingredients", recipeList);
+        model.addAttribute("drink", drink);
+
+        return "drink/view";
+    }
     public List<Ingredient> generateTypeList(Ingredient.Type type){
         Iterable<Ingredient> ingredients = ingredientDao.findAll();
         List<Ingredient> typeList = new ArrayList<Ingredient>();
@@ -175,6 +206,16 @@ public class DrinkController {
         for (User u : userDao.findAll()){
             if (u.getName().equals(name)){
                 return u;
+            }
+        }
+        return null;
+    }
+
+    public User findByName(String name){
+
+        for (User user : userDao.findAll()){
+            if(user.getName().equals(name)){
+                return user;
             }
         }
         return null;
