@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<script>
+$(document).ready(function() {
+    var $ingredient3 = $('#id_ingredient3').closest('span').hide();
+	var $ingredient4 = $('#id_ingredient4').closest('span').hide();
+
+    $('#id_ingredient2').change(function() {
+            $ingredient3.show();
+    });
+    $('#id_ingredient3').change(function() {
+            $ingredient4.show();
+    });
+});
+</script>
 
 <body class="container">
 
@@ -8,7 +24,7 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" style="max-width:600px;" >
+<form method="post" style="max-width:600px;" id="add_ingredient_form" >
     <input type="hidden" name="ingredient3" id="ingredient3" value=""/>
     <input type="hidden" name="ingredient4" id="ingredient4" value=""/>
     <div class="form-group">
@@ -52,7 +68,7 @@
         <label th:for="measurement">Amount</label>
         <input class="measurementInput" name="measurement2"/>
         <label th:for="ingredient">Ingredient</label>
-        <select th:replace="fragments :: dropdown(name='ingredient2')"></select>
+        <select id="id_ingredient2" th:replace="fragments :: dropdown(name='ingredient2')"></select>
     </span>
     <br>
     </div>
@@ -61,14 +77,14 @@
         <label th:for="measurement">Amount</label>
         <input class="measurementInput" name="measurement3"/>
         <label th:for="ingredient">Ingredient</label>
-        <select th:replace="fragments :: dropdown(name='ingredient3')"></select>
+        <select id="id_ingredient3" th:replace="fragments :: dropdown(name='ingredient3')"></select>
     </span>
     <br>
     <span>
         <label th:for="measurement">Amount</label>
         <input class="measurementInput" name="measurement4"/>
         <label th:for="ingredient">Ingredient</label>
-        <select th:replace="fragments :: dropdown(name='ingredient4')"></select>
+        <select id="id_ingredient4" th:replace="fragments :: dropdown(name='ingredient4')"></select>
     </span>
     <br>
     Ingredient not found? <a href="../ingredient/add" id="addIngredientLink">Add New Ingredient</a><br>
@@ -79,4 +95,5 @@
 
 
 </body>
+
 </html>

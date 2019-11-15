@@ -62,7 +62,8 @@ public class DrinkController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addDrink (Model model, HttpServletRequest request) {
         //check for logged-in user
-        HttpSession session = request.getSession();
+        //TODO: un-comment this block. Currently commented out to allow testing without logging in.
+        /*HttpSession session = request.getSession();
         String name = (String)session.getAttribute("name");
         if (name == null){
             model.addAttribute("title", "Drink List");
@@ -70,7 +71,7 @@ public class DrinkController {
             model.addAttribute("drinkList", drinkDao.findAll());
             return "drink/index";
         }
-
+*/
         //populate lists for glass types, mix types, and chill types
         Drink.GlassType[] glassList = org.launchcode.Bartender.models.Drink.GlassType.values();
         Drink.MixType[] mixList = org.launchcode.Bartender.models.Drink.MixType.values();

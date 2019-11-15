@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO : To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
-//TODO: perform Session check at views that should only be accessible by logged-in users
+//TODO: change "MyBar" link to My Profile. Create profile with My Bar and Favorites.
 
 @Controller
 @RequestMapping(value = "user")

@@ -3,6 +3,7 @@ package org.launchcode.Bartender.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,9 @@ public class Drink {
 
     @ManyToMany(mappedBy = "drinks")
     private List<User> users;
+
+/*    @OneToMany(mappedBy = "drink")
+    private List<Rating> ratings = new ArrayList<>();*/
 
     public Drink (int id, String name, Map<String, String> recipe, String instructions, GlassType glassType,
                   ChillType chillType, MixType mixType){

@@ -3,6 +3,7 @@ package org.launchcode.Bartender.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,9 @@ public class User {
 
     @ManyToMany
     private List<Drink> drinks;
+
+/*    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings = new ArrayList<>();*/
 
     public User (int id, String name, String email, String password) {
         this();
