@@ -8,12 +8,28 @@
 $(document).ready(function() {
     var $ingredient3 = $('#id_ingredient3').closest('div').hide();
 	var $ingredient4 = $('#id_ingredient4').closest('div').hide();
+	var $ingredient5 = $('#id_ingredient5').closest('div').hide();
+	var $ingredient6 = $('#id_ingredient6').closest('div').hide();
+	var $ingredient7 = $('#id_ingredient7').closest('div').hide();
+	var $ingredient8 = $('#id_ingredient8').closest('div').hide();
 
     $('#id_ingredient2').change(function() {
             $ingredient3.show();
     });
     $('#id_ingredient3').change(function() {
             $ingredient4.show();
+    });
+    $('#id_ingredient4').change(function() {
+            $ingredient5.show();
+    });
+    $('#id_ingredient5').change(function() {
+            $ingredient6.show();
+    });
+    $('#id_ingredient6').change(function() {
+            $ingredient7.show();
+    });
+    $('#id_ingredient7').change(function() {
+            $ingredient8.show();
     });
 });
 </script>
@@ -27,6 +43,10 @@ $(document).ready(function() {
 <form method="post" style="max-width:600px;" id="add_ingredient_form" >
     <input type="hidden" name="ingredient3" id="ingredient3" value=""/>
     <input type="hidden" name="ingredient4" id="ingredient4" value=""/>
+    <input type="hidden" name="ingredient5" id="ingredient5" value=""/>
+    <input type="hidden" name="ingredient6" id="ingredient6" value=""/>
+    <input type="hidden" name="ingredient7" id="ingredient7" value=""/>
+    <input type="hidden" name="ingredient8" id="ingredient8" value=""/>
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" name="name"/>
@@ -57,36 +77,55 @@ $(document).ready(function() {
     </div>
 
     <div id="ingredients_wrapper">
-    <div>
-        <label th:for="measurement">Amount</label>
-        <input class="measurementInput" name="measurement1"/>
-        <label th:for="ingredient">Ingredient</label>
-        <span  th:insert="fragments :: dropdown(name='ingredient1')"></span>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement1"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span  th:insert="fragments :: dropdown(name='ingredient1')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement2"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient2" th:insert="fragments :: dropdown(name='ingredient2')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement3"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient3" th:insert="fragments :: dropdown(name='ingredient3')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement4"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient4" th:insert="fragments :: dropdown(name='ingredient4')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement5"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient5" th:insert="fragments :: dropdown(name='ingredient5')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement6"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient6" th:insert="fragments :: dropdown(name='ingredient6')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement7"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient7" th:insert="fragments :: dropdown(name='ingredient7')"></span>
+        </div>
+        <div>
+            <label th:for="measurement">Amount</label>
+            <input class="measurementInput" name="measurement8"/>
+            <label th:for="ingredient">Ingredient</label>
+            <span id="id_ingredient8" th:insert="fragments :: dropdown(name='ingredient8')"></span>
+        </div>
     </div>
-    <br>
-    <div>
-        <label th:for="measurement">Amount</label>
-        <input class="measurementInput" name="measurement2"/>
-        <label th:for="ingredient">Ingredient</label>
-        <span id="id_ingredient2" th:insert="fragments :: dropdown(name='ingredient2')"></span>
-    </div>
-    <br>
-    </div>
-
-    <div>
-        <label th:for="measurement">Amount</label>
-        <input class="measurementInput" name="measurement3"/>
-        <label th:for="ingredient">Ingredient</label>
-        <span id="id_ingredient3" th:insert="fragments :: dropdown(name='ingredient3')"></span>
-    </div>
-    <br>
-    <div>
-        <label th:for="measurement">Amount</label>
-        <input class="measurementInput" name="measurement4"/>
-        <label th:for="ingredient">Ingredient</label>
-        <span id="id_ingredient4" th:insert="fragments :: dropdown(name='ingredient4')"></span>
-    </div>
-    <br>
     Ingredient not found? <a href="../ingredient/add" id="addIngredientLink">Add New Ingredient</a><br>
     <label th:for="instructions">Instructions</label>
     <input class="instructionsInput" name="instructions">

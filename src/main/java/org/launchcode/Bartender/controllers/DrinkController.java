@@ -102,18 +102,35 @@ public class DrinkController {
                             @RequestParam String measurement2, @RequestParam String ingredient2,
                             @RequestParam String measurement3, @RequestParam String ingredient3,
                             @RequestParam String measurement4, @RequestParam String ingredient4,
+                            @RequestParam String measurement5, @RequestParam String ingredient5,
+                            @RequestParam String measurement6, @RequestParam String ingredient6,
+                            @RequestParam String measurement7, @RequestParam String ingredient7,
+                            @RequestParam String measurement8, @RequestParam String ingredient8,
                             @RequestParam Drink.GlassType glassType, @RequestParam Drink.MixType mixType,
                             @RequestParam Drink.ChillType chillType, @RequestParam String instructions) {
         //build recipe HashMap to add to Drink object
         Map<String, String> recipe = new LinkedHashMap<String, String>();
-
+        System.out.println(measurement2+' '+ingredient2);
+        System.out.println(measurement3+' '+ingredient3);
         recipe.put(measurement1, ingredient1);
         recipe.put(measurement2, ingredient2);
         if (!measurement3.isEmpty()){
-            recipe.put(measurement3, ingredient3);
+            recipe.put(measurement3, ingredient3.replaceAll("[^\\d]", ""));
         }
         if (!measurement4.isEmpty()){
-            recipe.put(measurement4, ingredient4);
+            recipe.put(measurement4, ingredient4.replaceAll("[^\\d]", ""));
+        }
+        if (!measurement5.isEmpty()){
+            recipe.put(measurement5, ingredient5.replaceAll("[^\\d]", ""));
+        }
+        if (!measurement6.isEmpty()){
+            recipe.put(measurement6, ingredient6.replaceAll("[^\\d]", ""));
+        }
+        if (!measurement7.isEmpty()){
+            recipe.put(measurement7, ingredient7.replaceAll("[^\\d]", ""));
+        }
+        if (!measurement8.isEmpty()){
+            recipe.put(measurement8, ingredient8.replaceAll("[^\\d]", ""));
         }
         Drink newDrink = new Drink();
         newDrink.setName(name);
@@ -186,6 +203,7 @@ public class DrinkController {
         for (Ingredient.Type t : Ingredient.Type.values()){
             for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
                 //call ingredient object
+                System.out.println(entry.getKey()+' '+entry.getValue());
                 int ingredientId = Integer.parseInt(entry.getValue());
                 Ingredient ingredient = ingredientDao.findById(ingredientId).get();
                 //check if ingredient type matches iteration type
