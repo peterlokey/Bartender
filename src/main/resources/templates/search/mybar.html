@@ -10,15 +10,18 @@
 
 <span>
     <form method="post">
-        <input id="searchTerm" name="searchTerm" />
+        <span>
+        <label for="ingredient-number">Show me drinks with</label>
+            <select id="ingredient-number" name="ingredientNumber">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </span>
         <input type="submit" />
     </form>
-</span>
 
-<form th:if="${session.name}" method="post" action="search/mybar">
-    <input type="hidden" name="ingredientNumber" value="0"/>
-    <button>Find Drinks using My Bar ingredients</button>
-</form>
+</span>
 
 <div th:if="${searchResults} and ${searchResults.size()}">
     <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>

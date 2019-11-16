@@ -50,29 +50,43 @@ public class SearchController {
     }
 
     @RequestMapping(value = "mybar")
-    public String myBarSearch (Model model, HttpServletRequest request){
+
+    public String myBarSearch (Model model, HttpServletRequest request, @RequestParam String ingredientNumber){
         HttpSession session=request.getSession(false);
         String name = (String)session.getAttribute("name");
         User user = findByName(name);
+        ArrayList<Drink> searchResults = searchMyBar(user, Integer.parseInt(ingredientNumber));
+
+        model.addAttribute("title", "Search Using 'My Bar' Ingredients");
+        model.addAttribute("searchResults", searchResults);
+        return "search/mybar";
+    }
+
+    public ArrayList<Drink> searchMyBar (User user, int ingredientNumber){
         ArrayList<Drink> searchResults = new ArrayList<>();
 
+        //loop through each Drink Recipe
         for (Drink drink : drinkDao.findAll()){
+            int badIngredientCounter = 0;
             boolean matchedDrink = true;
+            //loop through each ingredient in current Drink iteration
             for (Map.Entry<String,String> ingredientPair : drink.getRecipe().entrySet()){
                 Integer ingredientId = Integer.parseInt(ingredientPair.getValue());
                 Ingredient ingredient = ingredientDao.findById(ingredientId).get();
+                //count ingredients not found in My Bar
                 if (!user.getMyBar().contains(ingredient)){
-                    matchedDrink = false;
-                    break;
+                    badIngredientCounter ++;
+                    if(badIngredientCounter > ingredientNumber){
+                        matchedDrink = false;
+                        break;
+                    }
                 }
             }
             if (matchedDrink == true){
                 searchResults.add(drink);
             }
         }
-
-        model.addAttribute("searchResults", searchResults);
-        return "search/index";
+        return searchResults;
     }
 
     public User findByName(String name){

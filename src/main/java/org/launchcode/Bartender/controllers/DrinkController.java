@@ -18,6 +18,7 @@ import java.util.*;
 
 //TODO: I need to put in some redirects somewhere. Getting mapping errors after multiple navigation clicks
 
+
 @Controller
 @RequestMapping(value = "drink")
 public class DrinkController {
@@ -110,8 +111,6 @@ public class DrinkController {
                             @RequestParam Drink.ChillType chillType, @RequestParam String instructions) {
         //build recipe HashMap to add to Drink object
         Map<String, String> recipe = new LinkedHashMap<String, String>();
-        System.out.println(measurement2+' '+ingredient2);
-        System.out.println(measurement3+' '+ingredient3);
         recipe.put(measurement1, ingredient1);
         recipe.put(measurement2, ingredient2);
         if (!measurement3.isEmpty()){
