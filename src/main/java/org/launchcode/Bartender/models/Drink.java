@@ -44,8 +44,8 @@ public class Drink {
     @ManyToMany(mappedBy = "drinks")
     private List<User> users;
 
-/*    @OneToMany(mappedBy = "drink")
-    private List<Rating> ratings = new ArrayList<>();*/
+    @OneToMany(mappedBy = "drink")
+    private List<Rating> ratings = new ArrayList<>();
 
     public Drink (int id, String name, Map<String, String> recipe, String instructions, GlassType glassType,
                   ChillType chillType, MixType mixType){

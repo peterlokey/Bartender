@@ -12,6 +12,21 @@
     <input type="hidden" th:name="drinkId" th:value="*{id}" />
     <input th:if="!${favorited}"type="submit" value="Add To Favorites" />
 </form>
+<!--TODO:Display average rating. If user has rated Drink, display user rating.-->
+
+<form th:if="${session.name}" action="../rate" th:object="${drink}">
+    <input type="hidden" th:name="drinkId" th:value="*{id}" />
+    <label th:for="ratingScore">Rate This Drink</label>
+    <select id="ratingScore" name="ratingScore">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+    <input type="submit" value="Rate" />
+</form>
+
 <form th:if="${session.name}" action="../favorite/remove" th:object="${drink}">
     <input type="hidden" th:name="drinkId" th:value="*{id}" />
     <input th:if="${favorited}"type="submit" value="Remove From Favorites" />

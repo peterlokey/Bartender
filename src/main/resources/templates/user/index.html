@@ -8,6 +8,8 @@
 
 <h1 th:text="'Welcome, '+${session.name}"></h1>
 
+<!--TODO: either list or link to list of User Favorite Drinks-->
+
 <h1>My Bar</h1>
 <ul>
     <li th:each="ingredient : ${myBar}" th:text="${ingredient.name}"></li>

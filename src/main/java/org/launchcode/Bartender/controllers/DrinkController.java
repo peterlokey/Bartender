@@ -1,11 +1,9 @@
 package org.launchcode.Bartender.controllers;
 
-import org.launchcode.Bartender.models.Drink;
-import org.launchcode.Bartender.models.Ingredient;
-import org.launchcode.Bartender.models.Recipe;
-import org.launchcode.Bartender.models.User;
+import org.launchcode.Bartender.models.*;
 import org.launchcode.Bartender.models.data.DrinkDao;
 import org.launchcode.Bartender.models.data.IngredientDao;
+import org.launchcode.Bartender.models.data.RatingDao;
 import org.launchcode.Bartender.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +27,8 @@ public class DrinkController {
     private IngredientDao ingredientDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RatingDao ratingDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index (Model model) {
@@ -63,8 +63,7 @@ public class DrinkController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addDrink (Model model, HttpServletRequest request) {
         //check for logged-in user
-        //TODO: un-comment this block. Currently commented out to allow testing without logging in.
-        /*HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String name = (String)session.getAttribute("name");
         if (name == null){
             model.addAttribute("title", "Drink List");
@@ -72,7 +71,6 @@ public class DrinkController {
             model.addAttribute("drinkList", drinkDao.findAll());
             return "drink/index";
         }
-*/
         //populate lists for glass types, mix types, and chill types
         Drink.GlassType[] glassList = org.launchcode.Bartender.models.Drink.GlassType.values();
         Drink.MixType[] mixList = org.launchcode.Bartender.models.Drink.MixType.values();
@@ -142,6 +140,26 @@ public class DrinkController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "rate")
+    public String rate (Model model, HttpServletRequest request, @RequestParam String drinkId,
+                        @RequestParam String ratingScore){
+        int score=Integer.parseInt(ratingScore);
+        int drinkIdInt=Integer.parseInt(drinkId);
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        User user = findUserByName(name);
+        Drink drink = drinkDao.findById(drinkIdInt).get();
+        Rating rating;
+        if (findRating(drinkIdInt, user.getId())!= null) {
+            rating = findRating(drinkIdInt, user.getId());
+            rating.setScore(score);
+        } else {
+            rating = new Rating(user, drink, score);
+        }
+        ratingDao.save(rating);
+        return "redirect:";
+    }
+
     @RequestMapping(value = "favorite")
     public String addToFavorites (Model model, HttpServletRequest request, @RequestParam String drinkId){
         HttpSession session = request.getSession();
@@ -202,7 +220,7 @@ public class DrinkController {
         for (Ingredient.Type t : Ingredient.Type.values()){
             for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
                 //call ingredient object
-                System.out.println(entry.getKey()+' '+entry.getValue());
+
                 int ingredientId = Integer.parseInt(entry.getValue());
                 Ingredient ingredient = ingredientDao.findById(ingredientId).get();
                 //check if ingredient type matches iteration type
@@ -238,4 +256,16 @@ public class DrinkController {
         }
         return null;
     }
+
+    public Rating findRating(int drinkId, int userId){
+        for (Rating r : ratingDao.findAll()){
+            if (r.getDrink().getId()==drinkId){
+                if (r.getUser().getId()==userId){
+                    return r;
+                }
+            }
+        }
+        return null;
+    }
+
 }

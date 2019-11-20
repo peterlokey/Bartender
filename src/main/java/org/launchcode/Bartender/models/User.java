@@ -31,8 +31,8 @@ public class User {
     @ManyToMany
     private List<Drink> drinks;
 
-/*    @OneToMany(mappedBy = "user")
-    private List<Rating> ratings = new ArrayList<>();*/
+    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings = new ArrayList<>();
 
     public User (int id, String name, String email, String password) {
         this();

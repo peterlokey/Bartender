@@ -1,10 +1,13 @@
-/*
 package org.launchcode.Bartender.models;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
 public class Rating {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -48,4 +51,3 @@ public class Rating {
         this.score = score;
     }
 }
-*/
