@@ -52,8 +52,13 @@ public class DrinkController {
             if (user.getDrinks().contains(drink)) {
                 model.addAttribute("favorited", true);
             }
+            Rating userRating = findRating(drink.getId(), findByName(name).getId());
+            if (userRating != null){
+                model.addAttribute("userRating", userRating.getScore());
+            }
         }
-
+        double rating = getAverageRating(drink);
+        model.addAttribute("rating", rating);
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
 
@@ -268,4 +273,16 @@ public class DrinkController {
         return null;
     }
 
+    public double getAverageRating(Drink drink){
+        int count = 0;
+        int sum = 0;
+        for (Rating rating : ratingDao.findAll()){
+            if (rating.getDrink().equals(drink)){
+                sum += rating.getScore();
+                count++;
+            }
+        }
+        double average = sum/count;
+        return average;
+    }
 }
