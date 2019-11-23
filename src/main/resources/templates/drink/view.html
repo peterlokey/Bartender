@@ -15,9 +15,7 @@
     <input type="hidden" th:name="drinkId" th:value="*{id}" />
     <input th:if="!${favorited}"type="submit" value="Add To Favorites" />
 </form>
-<!--TODO:Display average rating. If user has rated Drink, display user rating.-->
-User Rating:
-<div id="rateYo2"></div>
+<!--TODO:onChange, send userRating to controller-->
 
 
 <script>$(function () {
@@ -29,17 +27,26 @@ User Rating:
     precision: 2
   });
 
+});
+</script>
+
+<script>
+   $(function () {
+
   $("#rateYo2").rateYo({
     ratedFill: "#03fcfc",
     rating: [[${userRating}]],
     fullStar: true
-
-    }
   });
+
+});
 
 </script>
 
-<form th:if="${session.name}" action="../rate" id="rate-form" th:object="${drink}">
+
+<form th:if="${session.name}" action="../rate" th:object="${drink}">
+    User Rating:
+    <div id="rateYo2"></div>
     <input type="hidden" th:name="drinkId" th:value="*{id}" />
     <label th:for="ratingScore">Rate This Drink</label>
     <select id="ratingScore" name="ratingScore">

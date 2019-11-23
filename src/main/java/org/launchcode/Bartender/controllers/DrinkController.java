@@ -55,6 +55,8 @@ public class DrinkController {
             Rating userRating = findRating(drink.getId(), findByName(name).getId());
             if (userRating != null){
                 model.addAttribute("userRating", userRating.getScore());
+            }else{
+                model.addAttribute("userRating", 0);
             }
         }
         double rating = getAverageRating(drink);
@@ -281,6 +283,9 @@ public class DrinkController {
                 sum += rating.getScore();
                 count++;
             }
+        }
+        if (count == 0){
+            return 0;
         }
         double average = sum/count;
         return average;

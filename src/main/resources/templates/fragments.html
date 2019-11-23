@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
 
 </head>
 <body>
@@ -34,6 +35,7 @@
 
 
 </nav>
+
 <!--TODO: Could a loop be used to DRY this up? -->
 <select th:fragment="dropdown" th:name="${name}">
     <optgroup label="Vodka">
