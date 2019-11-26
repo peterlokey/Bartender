@@ -3,7 +3,7 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
-
+<div id="wrapper">
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
@@ -100,6 +100,8 @@
     <input type = "submit" value="Add Drink"/>
 </form>
 
+</div>
+<div th:insert="fragments :: footer"></div>
 
 </body>
 

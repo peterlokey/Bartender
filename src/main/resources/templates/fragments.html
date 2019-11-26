@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title th:text="${title}">Bartenders Guide</title>
+    <title>MIKZIT</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link th:href="@{/css/business-casual.min.css}" rel="stylesheet">
+    <link th:href="@{/css/business-casual.css}" rel="stylesheet">
 
 
 
@@ -53,7 +53,7 @@
 
 <nav th:fragment="navigation" class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Start Bootstrap</a>
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Mikser</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -77,7 +77,7 @@
                     <a class="nav-link text-uppercase text-expanded" href="/user/login">Log In</a>
                 </li>
                 <li th:if="${session.isEmpty()}" class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded" href="/signup">Sign Up</a>
+                    <a class="nav-link text-uppercase text-expanded" href="/user/signup">Sign Up</a>
                 </li>
                 <li th:if="${session.name}" class="nav-item px-lg-4">
                     <a class="nav-link text-uppercase text-expanded" href="/drink/add">Add A Recipe</a>
@@ -149,6 +149,18 @@
         </option>
     </optgroup>
 </select>
+
+<!--<footer th:fragment="footer" class="footer text-faded text-center py-5">
+    <div class="container">
+        <p class="m-0 small">Copyright &copy; Peter Lokey 2019</p>
+    </div>
+</footer>-->
+
+<footer th:fragment="footer" id="sticky-footer" class="footer text-faded text-center py-5">
+    <div class="container">
+        <p class="m-0 small">Copyright &copy; Peter Lokey 2019</p>
+    </div>
+</footer>
 
 </body>
 </html>

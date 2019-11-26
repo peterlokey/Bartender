@@ -3,7 +3,7 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
-
+<div id="wrapper">
 <nav th:replace="fragments :: navigation"></nav>
 
 <span>
@@ -81,5 +81,7 @@
 </table>
 <br>
 <p th:text="${drink.instructions}"></p>
+</div>
+<div th:insert="fragments :: footer"></div>
 </body>
 </html>
