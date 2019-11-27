@@ -28,7 +28,7 @@ public class Drink {
 
     private GlassType glassType;
     public enum GlassType {
-        HIGHBALL, COCKTAIL, MARTINI, ROCKS, SHOT, PINT
+        HIGHBALL, COCKTAIL, MARTINI, ROCKS, SHOT, PINT, WINE
     }
 
     private ChillType chillType;
@@ -40,6 +40,8 @@ public class Drink {
     public enum MixType {
         SHAKE, STIR, BUILD
     }
+
+    private String clipart;
 
     @ManyToMany(mappedBy = "drinks")
     private List<User> users;
@@ -120,4 +122,13 @@ public class Drink {
     public List<User> getUsers() {
         return users;
     }
+
+    public String getClipart() {
+        return clipart;
+    }
+
+    public void setClipart(String clipart) {
+        this.clipart = clipart;
+    }
 }
+

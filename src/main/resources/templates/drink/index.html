@@ -12,6 +12,7 @@
 
 <ul>
     <li th:each="drink : ${drinkList}">
+        <img class="clipart" th:src="@{${drink.clipart}}">
         <a th:href="@{'/drink/view/'+${drink.id}}" th:text="${drink.name}"></a>
     </li>
 </ul>

@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-//TODO: I need to put in some redirects somewhere. Getting mapping errors after multiple navigation clicks
-
 
 @Controller
 @RequestMapping(value = "drink")
@@ -63,6 +61,7 @@ public class DrinkController {
         model.addAttribute("rating", rating);
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
+        model.addAttribute("clipart", getClipArtString(drink));
 
         return "drink/view";
     }
@@ -143,6 +142,7 @@ public class DrinkController {
         newDrink.setChillType(chillType);
         newDrink.setGlassType(glassType);
         newDrink.setMixType(mixType);
+        newDrink.setClipart(getClipArtString(newDrink));
         drinkDao.save(newDrink);
         return "redirect:";
     }
@@ -290,4 +290,25 @@ public class DrinkController {
         double average = sum/count;
         return average;
     }
+
+    public String getClipArtString(Drink drink){
+        Drink.GlassType type = drink.getGlassType();
+        switch (type){
+            case HIGHBALL:
+            case PINT:
+                return "/img/pint.jpg";
+            case COCKTAIL:
+                return "/img/coupe.jpg";
+            case MARTINI:
+                return "/img/martini.jpg";
+            case ROCKS:
+                return "/img/rocks.jpg";
+            case WINE:
+                return "/img/wine.jpg";
+            case SHOT:
+                return "/img/shot.jpg";
+        }
+        return "";
+    }
+
 }
