@@ -133,7 +133,7 @@ public class UserController {
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String login(HttpSession session){
         session.invalidate();
-        return "index";
+        return "redirect:..";
     }
 
     @RequestMapping(value = "mybar/add", method = RequestMethod.GET)
