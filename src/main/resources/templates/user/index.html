@@ -2,19 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${title}">Default Title</h1>
 
 <h1 th:text="'Welcome, '+${session.name}"></h1>
 
 <!--TODO: either list or link to list of User Favorite Drinks-->
-
+<div id="my-bar">
 <h1>My Bar</h1>
 <ul>
     <li th:each="ingredient : ${myBar}" th:text="${ingredient.name}"></li>
 </ul>
 
 <a href="mybar/add">Add Ingredient to My Bar</a>
+</div>
+<div id="my-favorites">
+    <h1>My Favorites</h1>
+    <ul>
+        <li th:each="drink : ${myFavorites}">
+            <a th:href="'../drink/view/'+${drink.id}" th:text="${drink.name}"></a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

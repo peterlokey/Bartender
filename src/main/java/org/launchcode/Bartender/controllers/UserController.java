@@ -170,9 +170,14 @@ public class UserController {
     @RequestMapping(value = "")
     public String index(HttpServletRequest request, Model model){
         HttpSession session=request.getSession(false);
+
+        if (session == null){
+            return "redirect:";
+        }
         String name = (String)session.getAttribute("name");
         User user = findByName(name);
 
+        model.addAttribute("myFavorites", user.getDrinks());
         model.addAttribute("myBar", user.getMyBar());
         return "user/index";
     }

@@ -188,7 +188,7 @@ public class DrinkController {
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
 
-        return "drink/view";
+        return "redirect:/drink/view/"+drinkId;
     }
 
     @RequestMapping(value = "favorite/remove")
@@ -208,7 +208,7 @@ public class DrinkController {
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
 
-        return "drink/view";
+        return "redirect:/drink/view/"+drinkId;
     }
     public List<Ingredient> generateTypeList(Ingredient.Type type){
         Iterable<Ingredient> ingredients = ingredientDao.findAll();
