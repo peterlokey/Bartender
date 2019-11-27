@@ -294,18 +294,18 @@ public class DrinkController {
     public String getClipArtString(Drink drink){
         Drink.GlassType type = drink.getGlassType();
         switch (type){
-            case HIGHBALL:
-            case PINT:
+            case Highball:
+            case Pint:
                 return "/img/pint.jpg";
-            case COCKTAIL:
+            case Cocktail:
                 return "/img/coupe.jpg";
-            case MARTINI:
+            case Martini:
                 return "/img/martini.jpg";
-            case ROCKS:
+            case Rocks:
                 return "/img/rocks.jpg";
-            case WINE:
+            case Wine:
                 return "/img/wine.jpg";
-            case SHOT:
+            case Shot:
                 return "/img/shot.jpg";
         }
         return "";

@@ -28,17 +28,17 @@ public class Drink {
 
     private GlassType glassType;
     public enum GlassType {
-        HIGHBALL, COCKTAIL, MARTINI, ROCKS, SHOT, PINT, WINE
+        Highball, Cocktail, Martini, Rocks, Shot, Pint, Wine
     }
 
     private ChillType chillType;
     public enum ChillType {
-        ROCKS, UP, NEAT
+        Rocks, Up, Neat
     }
 
     private MixType mixType;
     public enum MixType {
-        SHAKE, STIR, BUILD
+        Shake, Stir, Build
     }
 
     private String clipart;
