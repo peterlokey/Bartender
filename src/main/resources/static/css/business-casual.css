@@ -259,3 +259,5 @@ p {
     height: 2rem;
     width: 2rem;
 }
+
+textarea { vertical-align: top; }

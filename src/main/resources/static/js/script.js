@@ -25,3 +25,4 @@ $(document).ready(function() {
             $ingredient8.show();
     });
 });
+

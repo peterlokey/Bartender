@@ -152,6 +152,7 @@ public class DrinkController {
                         @RequestParam String ratingScore){
         int score=Integer.parseInt(ratingScore);
         int drinkIdInt=Integer.parseInt(drinkId);
+        System.out.println(score);
         HttpSession session = request.getSession();
         String name = (String)session.getAttribute("name");
         User user = findUserByName(name);
