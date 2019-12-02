@@ -7,15 +7,39 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <span>
-<h2 th:text="${drink.name}"></h2>
-
-<div id="rateYo"></div>
+<span class="title-text" th:text="${drink.name}"></span>
+&#8194
+    <img class="title-clipart" th:src="@{${clipart}}">
+    <div class="right-align">
+        <form  th:if="${session.name}" action="../rate" th:object="${drink}">
+            User Rating:
+            <div id="rateYo2"></div>
+            <input type="hidden" th:name="drinkId" th:value="*{id}" />
+            <!--<input type="hidden" th:name="drinkRating" th:value="${userRating}" />-->
+            <label th:for="ratingScore">Rate This Drink</label>
+            <select id="ratingScore" name="ratingScore">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <input type="submit" value="Rate" />
+        </form>
+        <form th:if="${session.name}" action="../favorite" th:object="${drink}">
+            <input type="hidden" th:name="drinkId" th:value="*{id}" />
+            <input th:if="!${favorited}"type="submit" value="Add To Favorites" />
+        </form>
+        <form th:if="${session.name}" action="../favorite/remove" th:object="${drink}">
+            <input type="hidden" th:name="drinkId" th:value="*{id}" />
+            <input th:if="${favorited}"type="submit" value="Remove From Favorites" />
+        </form>
+    </div>
 </span>
+<div id="rateYo"></div>
 
-<form th:if="${session.name}" action="../favorite" th:object="${drink}">
-    <input type="hidden" th:name="drinkId" th:value="*{id}" />
-    <input th:if="!${favorited}"type="submit" value="Add To Favorites" />
-</form>
+
+
 <!--TODO:onChange, send userRating to controller-->
 
 
@@ -35,55 +59,33 @@
    $(function () {
 
   $("#rateYo2").rateYo({
-    onChange: function(rating, #rateYo2) {
-    document.getElementById("userRating").value = normalFill;
-    (#rating-form).submit()
-  },
     ratedFill: "#03fcfc",
     rating: [[${userRating}]],
     fullStar: true
-    var normalFill = $("#rateYo2").rateYo("option", "rating");
+    <!--onChange: (#rating-form).submit()-->
+  });
+
 
 });
 
 </script>
 
-
-<form id="rating-form" th:if="${session.name}" action="../rate" th:object="${drink}">
-    User Rating:
-    <div id="rateYo2"></div>
-    <input type="hidden" th:name="drinkId" th:value="*{id}" />
-    <input type="hidden" id= "userRating" th:name="ratingScore" th:value="${userRating}" />
-   <!-- <label th:for="ratingScore">Rate This Drink</label>
-    <select id="ratingScore" name="ratingScore">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-    </select>-->
-    <input type="submit" value="Rate" />
-</form>
-
-<form th:if="${session.name}" action="../favorite/remove" th:object="${drink}">
-    <input type="hidden" th:name="drinkId" th:value="*{id}" />
-    <input th:if="${favorited}"type="submit" value="Remove From Favorites" />
-</form>
-<br><br>
-<img class="clipart" th:src="@{${clipart}}">
+<br>
 <table>
-    <tr>Glass:  </tr>
-    <tr th:text="${drink.glassType}"></tr>
-    <tr>Mix Method:</tr>
-    <tr th:text="${drink.mixType}"></tr>
-    <tr>Chill Method:</tr>
-    <tr th:text="${drink.chillType}"></tr>
-
+    <tr>
+        <td>Glass: &#8201</td>
+        <td th:text="${drink.glassType}"></td>
+        <td>&#8195 Mix Method: &#8201</td>
+        <td th:text="${drink.mixType}"></td>
+        <td>&#8195 Chill Method: &#8201</td>
+        <td th:text="${drink.chillType}"></td>
+    </tr>
 </table>
+<br>
 <table>
     <tr th:each="element : ${ingredients}">
-        <td th:text="${element.measurement}"></td>
-        <td th:text="${element.ingredientName}"></td>
+        <td class="recipe" th:text="${element.measurement}"></td>
+        <td class="recipe" th:text="${element.ingredientName}"></td>
     </tr>
 </table>
 <br>

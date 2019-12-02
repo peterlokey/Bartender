@@ -260,4 +260,21 @@ p {
     width: 2rem;
 }
 
+.title-clipart {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.title-text {
+    font-size: 3rem;
+}
+
+.right-align {
+    float: right;
+}
+
+td.recipe {
+    padding-right: 1rem;
+}
+
 textarea { vertical-align: top; }
