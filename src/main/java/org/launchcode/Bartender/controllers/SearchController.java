@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
+
+//TODO: Create a sortMyBar function to return a sorted list of "MyBar" ingredients (by type? by name?)
 
 @Controller
 @RequestMapping(value = "search")
@@ -50,7 +54,6 @@ public class SearchController {
     }
 
     @RequestMapping(value = "mybar")
-
     public String myBarSearch (Model model, HttpServletRequest request, @RequestParam String ingredientNumber){
         HttpSession session=request.getSession(false);
         String name = (String)session.getAttribute("name");
@@ -60,6 +63,26 @@ public class SearchController {
         model.addAttribute("title", "Search Using 'My Bar' Ingredients");
         model.addAttribute("searchResults", searchResults);
         return "search/mybar";
+    }
+
+    @RequestMapping(value = "select-ingredients", method = RequestMethod.GET)
+    public String selectIngredients (Model model, HttpServletRequest request){
+        HttpSession session=request.getSession(false);
+        String name = (String)session.getAttribute("name");
+        User user = findByName(name);
+        model.addAttribute("title", "Select ingredients to search for");
+        model.addAttribute("myBar", user.getMyBar());
+        return "search/select-ingredients";
+    }
+
+    @RequestMapping(value = "select-ingredients", method = RequestMethod.POST)
+    public String selectIngredients (Model model, @RequestParam String ingredients){
+
+        String[] ingredientsArray = ingredients.split(",");
+        ArrayList<Drink> searchResults = searchSpecificIngredients(ingredientsArray);
+
+        model.addAttribute("searchResults", searchResults);
+        return "search/index";
     }
 
     public ArrayList<Drink> searchMyBar (User user, int ingredientNumber){
@@ -97,5 +120,21 @@ public class SearchController {
             }
         }
         return null;
+    }
+
+    public ArrayList<Drink> searchSpecificIngredients(String[] ingredientIds){
+        ArrayList<Drink> results = new ArrayList<>();
+        for (Drink drink : drinkDao.findAll()) {
+            boolean match = true;
+            for (String id : ingredientIds) {
+                if (!drink.getRecipe().containsValue(id)){
+                    match = false;
+                }
+            }
+            if (match == true){
+                results.add(drink);
+            }
+        }
+        return results;
     }
 }

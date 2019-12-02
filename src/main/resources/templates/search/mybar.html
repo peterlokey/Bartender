@@ -18,11 +18,14 @@
                 <option>1</option>
                 <option>2</option>
             </select>
+            ingredient(s) not stocked in my bar
         </span>
         <input type="submit" />
     </form>
 
 </span>
+
+Or, to select which ingredients from MyBar to search for, <a href="/search/select-ingredients">Click Here.</a>
 
 <div th:if="${searchResults} and ${searchResults.size()}">
     <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>

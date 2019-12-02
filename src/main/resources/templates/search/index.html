@@ -16,7 +16,7 @@
     </form>
 </span>
 
-<form th:if="${session.name}" method="post" action="search/mybar">
+<form th:if="${session.name}" method="post" action="/search/mybar">
     <input type="hidden" name="ingredientNumber" value="0"/>
     <button>Find Drinks using My Bar ingredients</button>
 </form>

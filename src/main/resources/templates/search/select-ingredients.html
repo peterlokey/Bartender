@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${title}">Default Title</h1>
+
+
+
+
+<div id="my-bar">
+
+    <form method="post">
+        <ul>
+            <li th:each="ingredient : ${myBar}">
+                <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
+            </li>
+        </ul>
+        <input type="submit" value="Search for Drinks!">
+    </form>
+
+
+</div>
+
+</body>
+</html>

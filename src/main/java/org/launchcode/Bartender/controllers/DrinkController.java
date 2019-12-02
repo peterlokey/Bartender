@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
+//TODO: Allow Drink List to be sorted by name, by rating, ?by base liquor type?
 
 @Controller
 @RequestMapping(value = "drink")
