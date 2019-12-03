@@ -123,6 +123,12 @@
                 th:text = "${ingredient.name}">
         </option>
     </optgroup>
+    <optgroup label="Cordial">
+        <option th:each="ingredient : ${cordialList}"
+                th:value = "${ingredient.id}"
+                th:text = "${ingredient.name}">
+        </option>
+    </optgroup>
     <optgroup label="Wine">
         <option th:each="ingredient : ${wineList}"
                 th:value = "${ingredient.id}"
