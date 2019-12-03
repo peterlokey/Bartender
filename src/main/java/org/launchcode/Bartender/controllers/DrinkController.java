@@ -19,7 +19,6 @@ import java.util.*;
 @RequestMapping(value = "drink")
 public class DrinkController {
 
-    /*TODO: After rating a drink, return to that drink's individual view, not Drink List*/
 
     @Autowired
     private DrinkDao drinkDao;

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
-/*TODO: Create session and log user in after Sign-Up*/
+
 
 @Controller
 @RequestMapping(value = "user")
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
-    public String signUp(Model model, @ModelAttribute User user, String verify) {
+    public String signUp(Model model, @ModelAttribute User user, String verify, HttpServletRequest request) {
         boolean hasErrors = false;
         //verify username length
         int len = user.getName().length();
@@ -87,6 +87,9 @@ public class UserController {
         }
 
         userDao.save(user);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("name", user.getName());
         model.addAttribute("name", user.getName());
         return "user/index";
     }
