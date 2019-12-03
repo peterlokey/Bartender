@@ -278,3 +278,12 @@ td.recipe {
 }
 
 textarea { vertical-align: top; }
+
+#add-ingredient-link {
+    position: absolute;
+    right: 0px;
+}
+
+.sub-header{
+    font-size: 4rem;
+}
