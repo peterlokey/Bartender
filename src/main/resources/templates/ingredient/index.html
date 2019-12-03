@@ -11,7 +11,7 @@
 <h5 th:text="${message}" id="error-message"></h5>
 <br>
 
-<a th:if="${session.name}" href="add">Add New Ingredient</a>
+<a th:if="${session.name}" href="/ingredient/add">Add New Ingredient</a>
 <h2>Vodka</h2>
 <p th:each="item : ${vodkaList}" th:text="${item.name}"></p>
 <h2>Gin</h2>

@@ -34,15 +34,15 @@ public class IngredientController {
             model.addAttribute("message", "Only Logged-In Users may add ingredients");
             Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
             model.addAttribute("typeList", typeList);
-            model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
-            model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
-            model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
-            model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-            model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
-            model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
-            model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
-            model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
-            model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+            model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka));
+            model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin));
+            model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
+            model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
+            model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+            model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
+            model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
+            model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
+            model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
             return "ingredient/index";
         }
 
@@ -72,30 +72,30 @@ public class IngredientController {
             model.addAttribute("nameError", "This Ingredient already exists");
             Ingredient.Type[] typeList = org.launchcode.Bartender.models.Ingredient.Type.values();
             model.addAttribute("typeList", typeList);
-            model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
-            model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
-            model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
-            model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-            model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
-            model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
-            model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
-            model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
-            model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+            model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka));
+            model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin));
+            model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
+            model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
+            model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+            model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
+            model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
+            model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
+            model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
             return "ingredient/add";
         }
 
         ingredientDao.save(ingredient);
 
         model.addAttribute("ingredientList", ingredientDao.findAll());
-        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
-        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
-        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
-        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
-        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
-        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
-        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
-        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
         return "ingredient/index";
     }
 
@@ -105,15 +105,15 @@ public class IngredientController {
         //
         model.addAttribute("ingredientList", ingredientDao.findAll());
         //TODO: possible move the sorting of ingredient types to client-side (JavaScript)
-        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
-        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
-        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
-        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
-        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
-        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
-        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
-        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
 
 
 

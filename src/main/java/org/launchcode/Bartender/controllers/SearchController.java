@@ -73,15 +73,15 @@ public class SearchController {
         User user = findByName(name);
         model.addAttribute("title", "Select ingredients to search for");
         /*model.addAttribute("myBar", user.getMyBar());*/
-        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA, ingredientDao.findAll()));
-        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN, ingredientDao.findAll()));
-        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM, ingredientDao.findAll()));
-        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA, ingredientDao.findAll()));
-        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY, ingredientDao.findAll()));
-        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE, ingredientDao.findAll()));
-        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS, ingredientDao.findAll()));
-        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER, ingredientDao.findAll()));
-        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH, ingredientDao.findAll()));
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka, ingredientDao.findAll()));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin, ingredientDao.findAll()));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum, ingredientDao.findAll()));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila, ingredientDao.findAll()));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey, ingredientDao.findAll()));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine, ingredientDao.findAll()));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters, ingredientDao.findAll()));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer, ingredientDao.findAll()));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish, ingredientDao.findAll()));
         return "search/select-ingredients";
     }
 

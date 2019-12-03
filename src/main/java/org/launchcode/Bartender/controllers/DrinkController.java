@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-//TODO: Allow Drink List to be sorted by name, by rating, ?by base liquor type?
+//TODO: Sorting Drink List by Rating has bugs. Not sorting new and old recipes together. Delete old recipes and re-add.
 
 @Controller
 @RequestMapping(value = "drink")
@@ -43,6 +43,7 @@ public class DrinkController {
 
         model.addAttribute("title", "Drink List");
         model.addAttribute("sorting", sorting);
+        List<Drink> sortedDrinks = sortDrinkListByRating();
         if(sorting.equals("alpha")){
             model.addAttribute("drinkList", sortDrinkListAlphabetically());
         }
@@ -103,15 +104,15 @@ public class DrinkController {
         model.addAttribute("mixList", mixList);
         model.addAttribute("chillList", chillList);
         model.addAttribute("title", "Add A New Drink Recipe");
-        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
-        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
-        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
-        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
-        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
-        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
-        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
-        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
 
 
         return "drink/add";
@@ -350,15 +351,15 @@ public class DrinkController {
     }
 
     public List<Drink> sortDrinkListByRating(){
-        Iterable<Drink> drinks = drinkDao.findAll();
-        ArrayList<Drink> drinkList = new ArrayList<Drink>();
-        /*ArrayList<Drink> drinkList = sortDrinkListAlphabetically();*/
-        for (Drink i : drinks){
+        /*Iterable<Drink> drinks = drinkDao.findAll();
+        ArrayList<Drink> drinkList = new ArrayList<Drink>();*/
+        ArrayList<Drink> drinkList = sortDrinkListAlphabetically();
+        /*for (Drink i : drinks){
             drinkList.add(i);
-        }
+        }*/
         for (int j=0; j<drinkList.size(); j++){
             for(int i=j+1; i<drinkList.size(); i++){
-                if(getAverageRating(drinkList.get(i)) < getAverageRating(drinkList.get(i))){
+                if(Double.compare(getAverageRating(drinkList.get(i)), getAverageRating(drinkList.get(j))) > 0){
                     Drink temp = drinkList.get(j);
                     drinkList.set(j, drinkList.get(i));
                     drinkList.set(i, temp);
