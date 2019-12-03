@@ -7,31 +7,70 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <h1 th:text="${title}">Default Title</h1>
-<br>
 <h5 th:text="${message}" id="error-message"></h5>
-<br>
-
+<h5>Click an item to display all drinks containing that ingredient</h5>
 <a th:if="${session.name}" href="/ingredient/add">Add New Ingredient</a>
 <h2>Vodka</h2>
-<p th:each="item : ${vodkaList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${vodkaList}">
+        <a th:text="${item.name}" th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Gin</h2>
-<p th:each="item : ${ginList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${ginList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Rum</h2>
-<p th:each="item : ${rumList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${rumList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
+
 <h2>Tequila</h2>
-<p th:each="item : ${tequilaList}" th:text="${item.name}"></p>
+<ul>
+    <li  th:each="item : ${tequilaList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Whiskey</h2>
-<p th:each="item : ${whiskeyList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${whiskeyList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Cordial</h2>
-<p th:each="item : ${cordialList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${cordialList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Wine</h2>
-<p th:each="item : ${wineList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${wineList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Mixer</h2>
-<p th:each="item : ${mixerList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${mixerList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Bitters</h2>
-<p th:each="item : ${bittersList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${bittersList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 <h2>Garnish</h2>
-<p th:each="item : ${garnishList}" th:text="${item.name}"></p>
+<ul>
+    <li th:each="item : ${garnishList}">
+        <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+    </li>
+</ul>
 
 
 </body>

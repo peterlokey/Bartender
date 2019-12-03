@@ -1,12 +1,15 @@
 package org.launchcode.Bartender.controllers;
 
+import org.launchcode.Bartender.models.Drink;
 import org.launchcode.Bartender.models.Ingredient;
+import org.launchcode.Bartender.models.data.DrinkDao;
 import org.launchcode.Bartender.models.data.IngredientDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,7 +25,10 @@ public class IngredientController {
 
     @Autowired
     private IngredientDao ingredientDao;
-/*TODO: Sort each type-list alphabetically*/
+
+    @Autowired
+    private DrinkDao drinkDao;
+
 /*TODO: Make Ingredient List clickable links to all drinks containing that Ingredient*/
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -115,10 +121,18 @@ public class IngredientController {
         model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
         model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
-
-
+        model.addAttribute("title", "Ingredients");
 
         return "ingredient/index";
+    }
+
+    @RequestMapping(value = "search/{ingredientId}", method = RequestMethod.GET)
+    public String searchIngredient (Model model, @PathVariable("ingredientId") String ingredientId) {
+
+        ArrayList<Drink> searchResults = searchSpecificIngredient(ingredientId);
+
+        model.addAttribute("searchResults", searchResults);
+        return "search/index";
     }
 
     //TODO: DRY this code- this function is repeated in multiple controllers.
@@ -142,5 +156,15 @@ public class IngredientController {
         }
 
         return typeList;
+    }
+
+    public ArrayList<Drink> searchSpecificIngredient(String ingredientId){
+        ArrayList<Drink> results = new ArrayList<>();
+        for (Drink drink : drinkDao.findAll()) {
+           if (drink.getRecipe().containsValue(ingredientId)){
+                results.add(drink);
+            }
+        }
+        return results;
     }
 }
