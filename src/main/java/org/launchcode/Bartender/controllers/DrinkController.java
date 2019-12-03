@@ -186,7 +186,7 @@ public class DrinkController {
             rating = new Rating(user, drink, score);
         }
         ratingDao.save(rating);
-        return "redirect:";
+        return "redirect:view/"+drinkId;
     }
 
     @RequestMapping(value = "favorite")
