@@ -6,7 +6,16 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1 th:text="${title}">Mikzit</h1>
+<span class="title-text" th:text="${title}"></span>
+<form method="post">
+    <input type="hidden" name="sorting" value="rating">
+    <input type="submit" value="Sort By Rating">
+</form>
+<form method="post">
+    <input type="hidden" name="sorting" value="alpha">
+    <input type="submit" value="Sort Alphabetically">
+</form>
+
 
 <h5 th:text="${message}" id="error-message"></h5>
 

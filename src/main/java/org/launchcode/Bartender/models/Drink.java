@@ -1,5 +1,8 @@
 package org.launchcode.Bartender.models;
 
+import org.launchcode.Bartender.models.data.RatingDao;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
@@ -27,6 +30,8 @@ public class Drink {
     private String instructions;
 
     private GlassType glassType;
+
+
     public enum GlassType {
         Highball, Cocktail, Martini, Rocks, Shot, Pint, Wine
     }
@@ -130,5 +135,6 @@ public class Drink {
     public void setClipart(String clipart) {
         this.clipart = clipart;
     }
+
 }
 

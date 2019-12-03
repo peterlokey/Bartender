@@ -33,8 +33,22 @@ public class DrinkController {
     public String index (Model model) {
 
         model.addAttribute("title", "Drink List");
-        /*List<Drink> sortedDrinks = sortDrinkList();*/
-        model.addAttribute("drinkList", sortDrinkList());
+        model.addAttribute("drinkList", sortDrinkListAlphabetically());
+        model.addAttribute("sorting", "alpha");
+        return "drink/index";
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String index (Model model, @RequestParam String sorting) {
+
+        model.addAttribute("title", "Drink List");
+        model.addAttribute("sorting", sorting);
+        if(sorting.equals("alpha")){
+            model.addAttribute("drinkList", sortDrinkListAlphabetically());
+        }
+        if(sorting.equals("rating")){
+            model.addAttribute("drinkList", sortDrinkListByRating());
+        }
         return "drink/index";
     }
 
@@ -314,7 +328,7 @@ public class DrinkController {
         return "";
     }
 
-    public List<Drink> sortDrinkList(){
+    public ArrayList<Drink> sortDrinkListAlphabetically(){
         Iterable<Drink> drinks = drinkDao.findAll();
         ArrayList<Drink> drinkList = new ArrayList<Drink>();
 
@@ -335,4 +349,23 @@ public class DrinkController {
         return drinkList;
     }
 
+    public List<Drink> sortDrinkListByRating(){
+        Iterable<Drink> drinks = drinkDao.findAll();
+        ArrayList<Drink> drinkList = new ArrayList<Drink>();
+        /*ArrayList<Drink> drinkList = sortDrinkListAlphabetically();*/
+        for (Drink i : drinks){
+            drinkList.add(i);
+        }
+        for (int j=0; j<drinkList.size(); j++){
+            for(int i=j+1; i<drinkList.size(); i++){
+                if(getAverageRating(drinkList.get(i)) < getAverageRating(drinkList.get(i))){
+                    Drink temp = drinkList.get(j);
+                    drinkList.set(j, drinkList.get(i));
+                    drinkList.set(i, temp);
+                }
+            }
+        }
+
+        return drinkList;
+    }
 }
