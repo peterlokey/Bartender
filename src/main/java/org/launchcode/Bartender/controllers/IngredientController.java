@@ -77,6 +77,7 @@ public class IngredientController {
             model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
             model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
             model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+            model.addAttribute("cordialList", generateTypeList(Ingredient.Type.Cordial));
             model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
             model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
             model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
@@ -92,6 +93,7 @@ public class IngredientController {
         model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
+        model.addAttribute("cordialList", generateTypeList(Ingredient.Type.Cordial));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
         model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
         model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
@@ -111,6 +113,7 @@ public class IngredientController {
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine));
+        model.addAttribute("cordialList", generateTypeList(Ingredient.Type.Cordial));
         model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
         model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));

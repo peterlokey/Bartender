@@ -143,6 +143,7 @@ public class UserController {
         model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum, ingredientDao.findAll()));
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila, ingredientDao.findAll()));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey, ingredientDao.findAll()));
+        model.addAttribute("cordialList", generateTypeList(Ingredient.Type.Cordial, ingredientDao.findAll()));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine, ingredientDao.findAll()));
         model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters, ingredientDao.findAll()));
         model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer, ingredientDao.findAll()));
@@ -185,6 +186,7 @@ public class UserController {
         model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum, user.getMyBar()));
         model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.Tequila, user.getMyBar()));
         model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.Whiskey, user.getMyBar()));
+        model.addAttribute("cordialList", generateTypeList(Ingredient.Type.Cordial, user.getMyBar()));
         model.addAttribute("wineList", generateTypeList(Ingredient.Type.Wine, user.getMyBar()));
         model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer, user.getMyBar()));
         model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters, user.getMyBar()));
