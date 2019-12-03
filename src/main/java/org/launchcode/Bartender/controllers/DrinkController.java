@@ -33,7 +33,8 @@ public class DrinkController {
     public String index (Model model) {
 
         model.addAttribute("title", "Drink List");
-        model.addAttribute("drinkList", drinkDao.findAll());
+        /*List<Drink> sortedDrinks = sortDrinkList();*/
+        model.addAttribute("drinkList", sortDrinkList());
         return "drink/index";
     }
 
@@ -311,6 +312,27 @@ public class DrinkController {
                 return "/img/shot.jpg";
         }
         return "";
+    }
+
+    public List<Drink> sortDrinkList(){
+        Iterable<Drink> drinks = drinkDao.findAll();
+        ArrayList<Drink> drinkList = new ArrayList<Drink>();
+
+        for (Drink i : drinks){
+            drinkList.add(i);
+        }
+
+        for (int j=0; j<drinkList.size(); j++){
+            for(int i=j+1; i<drinkList.size(); i++){
+                if((drinkList.get(i).getName().compareToIgnoreCase(drinkList.get(j).getName()) < 0)){
+                    Drink temp = drinkList.get(j);
+                    drinkList.set(j, drinkList.get(i));
+                    drinkList.set(i, temp);
+                }
+            }
+        }
+
+        return drinkList;
     }
 
 }

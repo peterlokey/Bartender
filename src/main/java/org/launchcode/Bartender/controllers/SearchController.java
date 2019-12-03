@@ -65,7 +65,7 @@ public class SearchController {
         model.addAttribute("searchResults", searchResults);
         return "search/mybar";
     }
-//TODO call to getnerateTypeList
+
     @RequestMapping(value = "select-ingredients", method = RequestMethod.GET)
     public String selectIngredients (Model model, HttpServletRequest request){
         HttpSession session=request.getSession(false);
