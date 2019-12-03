@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO : To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
-
+//To re-implement Spring Security, uncomment  code in build.gradle, HomeResource, and Security Configuration
+/*TODO: Create session and log user in after Sign-Up*/
 
 @Controller
 @RequestMapping(value = "user")

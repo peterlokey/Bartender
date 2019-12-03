@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-//TODO: Create a sortMyBar function to return a sorted list of "MyBar" ingredients (by type? by name?)
+
 
 @Controller
 @RequestMapping(value = "search")

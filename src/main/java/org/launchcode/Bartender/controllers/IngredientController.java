@@ -23,6 +23,7 @@ public class IngredientController {
     @Autowired
     private IngredientDao ingredientDao;
 
+/*TODO: Make Ingredient List clickable links to all drinks containing that Ingredient*/
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addIngredient (Model model, HttpServletRequest request) {
@@ -104,9 +105,6 @@ public class IngredientController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index (Model model) {
 
-        //
-        model.addAttribute("ingredientList", ingredientDao.findAll());
-        //TODO: possible move the sorting of ingredient types to client-side (JavaScript)
         model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka));
         model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin));
         model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum));

@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-//TODO: Sorting Drink List by Rating has bugs. Not sorting new and old recipes together. Delete old recipes and re-add.
 
 @Controller
 @RequestMapping(value = "drink")
 public class DrinkController {
+
+    /*TODO: After rating a drink, return to that drink's individual view, not Drink List*/
 
     @Autowired
     private DrinkDao drinkDao;
@@ -74,8 +75,10 @@ public class DrinkController {
                 model.addAttribute("userRating", 0);
             }
         }
-        double rating = getAverageRating(drink);
+        double rating  = getAverageRating(drink);
+        int numberOfRatings = getRatingCount(drink);
         model.addAttribute("rating", rating);
+        model.addAttribute("numberOfRatings", numberOfRatings);
         model.addAttribute("ingredients", recipeList);
         model.addAttribute("drink", drink);
         model.addAttribute("clipart", getClipArtString(drink));
@@ -306,8 +309,18 @@ public class DrinkController {
         if (count == 0){
             return 0;
         }
-        double average = sum/count;
+        double average = (double)sum/count;
         return average;
+    }
+
+    public int getRatingCount(Drink drink){
+        int count = 0;
+        for (Rating rating : ratingDao.findAll()){
+            if (rating.getDrink().equals(drink)){
+                count++;
+            }
+        }
+        return count;
     }
 
     public String getClipArtString(Drink drink){

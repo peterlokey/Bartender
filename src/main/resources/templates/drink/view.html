@@ -37,7 +37,7 @@
     </div>
 </span>
 <div id="rateYo"></div>
-
+<div th:text="'('+${numberOfRatings}+' ratings)'"></div>
 
 
 <!--TODO:onChange, send userRating to controller-->
@@ -47,7 +47,7 @@
 
   $("#rateYo").rateYo({
     rating: [[${rating}]],
-    halfStar: true,
+
     readOnly: true,
     precision: 2
   });
