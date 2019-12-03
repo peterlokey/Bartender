@@ -138,15 +138,15 @@ public class UserController {
 
     @RequestMapping(value = "mybar/add", method = RequestMethod.GET)
     public String addToMyBar(Model model){
-        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA));
-        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN));
-        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM));
-        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA));
-        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY));
-        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE));
-        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS));
-        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER));
-        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH));
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA, ingredientDao.findAll()));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN, ingredientDao.findAll()));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM, ingredientDao.findAll()));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA, ingredientDao.findAll()));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY, ingredientDao.findAll()));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE, ingredientDao.findAll()));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS, ingredientDao.findAll()));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER, ingredientDao.findAll()));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH, ingredientDao.findAll()));
 
         return "user/add-ingredient";
     }
@@ -179,12 +179,24 @@ public class UserController {
 
         model.addAttribute("myFavorites", user.getDrinks());
         model.addAttribute("myBar", user.getMyBar());
+        for (Ingredient i : generateTypeList(Ingredient.Type.VODKA, user.getMyBar())){
+            System.out.println(i);
+        }
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA, user.getMyBar()));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN, user.getMyBar()));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM, user.getMyBar()));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA, user.getMyBar()));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY, user.getMyBar()));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE, user.getMyBar()));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER, user.getMyBar()));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS, user.getMyBar()));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH, user.getMyBar()));
         return "user/index";
     }
 
 
-    public List<Ingredient> generateTypeList(Ingredient.Type type){
-        Iterable<Ingredient> ingredients = ingredientDao.findAll();
+    public List<Ingredient> generateTypeList(Ingredient.Type type, Iterable<Ingredient> ingredients){
+
         List<Ingredient> typeList = new ArrayList<Ingredient>();
         for (Ingredient i : ingredients){
             if (i.getType().equals(type)){

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 //TODO: Create a sortMyBar function to return a sorted list of "MyBar" ingredients (by type? by name?)
@@ -64,14 +65,23 @@ public class SearchController {
         model.addAttribute("searchResults", searchResults);
         return "search/mybar";
     }
-
+//TODO call to getnerateTypeList
     @RequestMapping(value = "select-ingredients", method = RequestMethod.GET)
     public String selectIngredients (Model model, HttpServletRequest request){
         HttpSession session=request.getSession(false);
         String name = (String)session.getAttribute("name");
         User user = findByName(name);
         model.addAttribute("title", "Select ingredients to search for");
-        model.addAttribute("myBar", user.getMyBar());
+        /*model.addAttribute("myBar", user.getMyBar());*/
+        model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.VODKA, ingredientDao.findAll()));
+        model.addAttribute("ginList", generateTypeList(Ingredient.Type.GIN, ingredientDao.findAll()));
+        model.addAttribute("rumList", generateTypeList(Ingredient.Type.RUM, ingredientDao.findAll()));
+        model.addAttribute("tequilaList", generateTypeList(Ingredient.Type.TEQUILA, ingredientDao.findAll()));
+        model.addAttribute("whiskeyList", generateTypeList(Ingredient.Type.WHISKEY, ingredientDao.findAll()));
+        model.addAttribute("wineList", generateTypeList(Ingredient.Type.WINE, ingredientDao.findAll()));
+        model.addAttribute("bittersList", generateTypeList(Ingredient.Type.BITTERS, ingredientDao.findAll()));
+        model.addAttribute("mixerList", generateTypeList(Ingredient.Type.MIXER, ingredientDao.findAll()));
+        model.addAttribute("garnishList", generateTypeList(Ingredient.Type.GARNISH, ingredientDao.findAll()));
         return "search/select-ingredients";
     }
 
@@ -136,5 +146,16 @@ public class SearchController {
             }
         }
         return results;
+    }
+
+    public List<Ingredient> generateTypeList(Ingredient.Type type, Iterable<Ingredient> ingredients){
+
+        List<Ingredient> typeList = new ArrayList<Ingredient>();
+        for (Ingredient i : ingredients){
+            if (i.getType().equals(type)){
+                typeList.add(i);
+            }
+        }
+        return typeList;
     }
 }
