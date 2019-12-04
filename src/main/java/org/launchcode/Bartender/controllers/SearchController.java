@@ -104,7 +104,7 @@ public class SearchController {
             boolean matchedDrink = true;
             //loop through each ingredient in current Drink iteration
             for (Map.Entry<String,String> ingredientPair : drink.getRecipe().entrySet()){
-                Integer ingredientId = Integer.parseInt(ingredientPair.getValue());
+                Integer ingredientId = Integer.parseInt(ingredientPair.getKey());
                 Ingredient ingredient = ingredientDao.findById(ingredientId).get();
                 //count ingredients not found in My Bar
                 if (!user.getMyBar().contains(ingredient)){
@@ -137,7 +137,7 @@ public class SearchController {
         for (Drink drink : drinkDao.findAll()) {
             boolean match = true;
             for (String id : ingredientIds) {
-                if (!drink.getRecipe().containsValue(id)){
+                if (!drink.getRecipe().containsKey(id)){
                     match = false;
                 }
             }

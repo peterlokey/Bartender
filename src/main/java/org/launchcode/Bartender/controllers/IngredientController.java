@@ -159,7 +159,7 @@ public class IngredientController {
     public ArrayList<Drink> searchSpecificIngredient(String ingredientId){
         ArrayList<Drink> results = new ArrayList<>();
         for (Drink drink : drinkDao.findAll()) {
-           if (drink.getRecipe().containsValue(ingredientId)){
+           if (drink.getRecipe().containsKey(ingredientId)){
                 results.add(drink);
             }
         }

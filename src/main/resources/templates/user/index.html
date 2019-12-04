@@ -33,7 +33,7 @@
     <h2 th:if="${not #lists.isEmpty(vodkaList)}">Garnish</h2>
     <p th:each="item : ${garnishList}" th:text="${item.name}"></p>
 
-<a href="mybar/add">Add Ingredient to My Bar</a>
+<a href="/user/mybar/add">Add Ingredient to My Bar</a>
 </div>
 <!--TODO: Add css to move My Favorites to Right Side of screen-->
 <div id="my-favorites">
