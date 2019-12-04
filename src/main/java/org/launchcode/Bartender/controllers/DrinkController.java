@@ -74,6 +74,7 @@ public class DrinkController {
                 model.addAttribute("userRating", 0);
             }
         }
+
         double rating  = getAverageRating(drink);
         int numberOfRatings = getRatingCount(drink);
         model.addAttribute("rating", rating);
@@ -135,25 +136,25 @@ public class DrinkController {
                             @RequestParam Drink.ChillType chillType, @RequestParam String instructions) {
         //build recipe HashMap to add to Drink object
         Map<String, String> recipe = new LinkedHashMap<String, String>();
-        recipe.put(measurement1, ingredient1);
-        recipe.put(measurement2, ingredient2);
+        recipe.put(ingredient1, measurement1);
+        recipe.put(ingredient2, measurement2);
         if (!measurement3.isEmpty()){
-            recipe.put(measurement3, ingredient3.replaceAll("[^\\d]", ""));
+            recipe.put(ingredient3.replaceAll("[^\\d]", ""), measurement3);
         }
         if (!measurement4.isEmpty()){
-            recipe.put(measurement4, ingredient4.replaceAll("[^\\d]", ""));
+            recipe.put(ingredient4.replaceAll("[^\\d]", ""), measurement4);
         }
         if (!measurement5.isEmpty()){
-            recipe.put(measurement5, ingredient5.replaceAll("[^\\d]", ""));
+            recipe.put(ingredient5.replaceAll("[^\\d]", ""), measurement5);
         }
         if (!measurement6.isEmpty()){
-            recipe.put(measurement6, ingredient6.replaceAll("[^\\d]", ""));
+            recipe.put(ingredient6.replaceAll("[^\\d]", ""), measurement6);
         }
         if (!measurement7.isEmpty()){
-            recipe.put(measurement7, ingredient7.replaceAll("[^\\d]", ""));
+            recipe.put(ingredient7.replaceAll("[^\\d]", ""), measurement7);
         }
         if (!measurement8.isEmpty()){
-            recipe.put(measurement8, ingredient8.replaceAll("[^\\d]", ""));
+            recipe.put(ingredient8.replaceAll("[^\\d]", ""), measurement8);
         }
         Drink newDrink = new Drink();
         newDrink.setName(name);
@@ -172,7 +173,6 @@ public class DrinkController {
                         @RequestParam String ratingScore){
         int score=Integer.parseInt(ratingScore);
         int drinkIdInt=Integer.parseInt(drinkId);
-        System.out.println(score);
         HttpSession session = request.getSession();
         String name = (String)session.getAttribute("name");
         User user = findUserByName(name);
@@ -249,12 +249,12 @@ public class DrinkController {
             for (Map.Entry<String, String> entry : recipeMap.entrySet()) {
                 //call ingredient object
 
-                int ingredientId = Integer.parseInt(entry.getValue());
+                int ingredientId = Integer.parseInt(entry.getKey());
                 Ingredient ingredient = ingredientDao.findById(ingredientId).get();
                 //check if ingredient type matches iteration type
                 if (ingredient.getType().equals(t)) {
                     Recipe recipe = new Recipe();
-                    recipe.measurement = entry.getKey();
+                    recipe.measurement = entry.getValue();
                     //add Recipe object to List if type matches iteration type
                     if (ingredientDao.findById(ingredientId).isPresent()) {
                         recipe.ingredientName = ingredientDao.findById(ingredientId).get().getName();
@@ -286,6 +286,7 @@ public class DrinkController {
     }
 
     public Rating findRating(int drinkId, int userId){
+
         for (Rating r : ratingDao.findAll()){
             if (r.getDrink().getId()==drinkId){
                 if (r.getUser().getId()==userId){

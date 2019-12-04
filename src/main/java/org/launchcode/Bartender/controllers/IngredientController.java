@@ -29,8 +29,6 @@ public class IngredientController {
     @Autowired
     private DrinkDao drinkDao;
 
-/*TODO: Make Ingredient List clickable links to all drinks containing that Ingredient*/
-
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addIngredient (Model model, HttpServletRequest request) {
         //check for logged-in user
