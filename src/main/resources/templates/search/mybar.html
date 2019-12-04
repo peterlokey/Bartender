@@ -12,20 +12,19 @@
 <span>
     <form method="post">
         <span>
-        <label for="ingredient-number">Show me drinks with</label>
+        <label for="ingredient-number">Select a number of extra ingredients (not stocked in MyBar) to allow in drink recipes</label>
             <select id="ingredient-number" name="ingredientNumber">
                 <option>0</option>
                 <option>1</option>
                 <option>2</option>
+                <option>3</option>
+                <option>4</option>
             </select>
-            ingredient(s) not stocked in my bar
         </span>
         <input type="submit" />
     </form>
 
 </span>
-
-Or, to select which ingredients from MyBar to search for, <a href="/search/select-ingredients">Click Here.</a>
 
 <div th:if="${searchResults} and ${searchResults.size()}">
     <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>

@@ -8,27 +8,34 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <h1 th:text="${title}">Default Title</h1>
-
-<span>
-    <form method="post">
-        <input id="searchTerm" name="searchTerm" />
-        <input type="submit" />
-    </form>
-</span>
-
-<form th:if="${session.name}" method="post" action="/search/mybar">
-    <input type="hidden" name="ingredientNumber" value="0"/>
-    <button>Find Drinks using My Bar ingredients</button>
-</form>
-
-<div th:if="${searchResults} and ${searchResults.size()}">
-    <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>
-    <ul>
-        <li th:each="drink : ${searchResults}">
-            <a th:href="'drink/view/'+${drink.id}" th:text="${drink.name}"></a>
-        </li>
-    </ul>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <form method="post">
+                <label for="searchTerm">Search Drinks by Name</label>
+                <input id="searchTerm" name="searchTerm" />
+                <input type="submit" />
+            </form>
+        </div>
+        <div class="col-md">
+            <form th:if="${session.name}" method="post" action="/search/mybar">
+                <input type="hidden" name="ingredientNumber" value="0"/>
+                <button>Find Drinks using My Bar ingredients</button>
+            </form>
+            <form action="/search/select-ingredients">
+                <input type="submit" value="Select specific ingredients to search for">
+            </form>
+        </div>
+    </div>
+        <div th:if="${searchResults} and ${searchResults.size()}">
+            <h3 th:text="${searchResults.size() + ' Result(s)'}"></h3>
+            <ul>
+                <li th:each="drink : ${searchResults}">
+                    <a th:href="'drink/view/'+${drink.id}" th:text="${drink.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>
