@@ -171,6 +171,7 @@ public class DrinkController {
     @RequestMapping(value = "rate")
     public String rate (Model model, HttpServletRequest request, @RequestParam String drinkId,
                         @RequestParam String ratingScore){
+
         int score=Integer.parseInt(ratingScore);
         int drinkIdInt=Integer.parseInt(drinkId);
         HttpSession session = request.getSession();

@@ -23,7 +23,7 @@ public class Drink {
     private String name;
 
     @ElementCollection
-    @Column(name="measurement") /*TODO:Switch these annotations to make ingredient the unique column. Must switch in controller as well*/
+    @Column(name="measurement")
     @MapKeyColumn(name = "ingredient")
     private Map<String, String> recipe = new LinkedHashMap<String, String>();    //Key - Measurement, Value - IngredientId
 
