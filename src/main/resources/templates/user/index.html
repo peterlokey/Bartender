@@ -7,84 +7,89 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
-<h1 th:text="'Welcome, '+${session.name}"></h1>
+<h1 th:text="'Welcome, '+${session.name}" class="center-text"></h1>
+
+<div class="container">
+    <div class="row">
+        <div id="my-bar" class="col-md">
+            <h1>My Bar</h1>
+            <br>
+            <a href="/user/mybar/add">Add Ingredient to My Bar</a>
+            <h2 th:if="${not #lists.isEmpty(vodkaList)}">Vodka</h2>
+            <ul>
+                <li th:each="item : ${vodkaList}">
+                    <a th:text="${item.name}" th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(ginList)}">Gin</h2>
+            <ul>
+                <li th:each="item : ${ginList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(rumList)}">Rum</h2>
+            <ul>
+                <li th:each="item : ${rumList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+
+            <h2 th:if="${not #lists.isEmpty(tequilaList)}">Tequila</h2>
+            <ul>
+                <li  th:each="item : ${tequilaList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(whiskeyList)}">Whiskey</h2>
+            <ul>
+                <li th:each="item : ${whiskeyList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(cordialList)}">Cordial</h2>
+            <ul>
+                <li th:each="item : ${cordialList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(wineList)}">Wine</h2>
+            <ul>
+                <li th:each="item : ${wineList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(mixerList)}">Mixer</h2>
+            <ul>
+                <li th:each="item : ${mixerList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(bittersList)}">Bitters</h2>
+            <ul>
+                <li th:each="item : ${bittersList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
+            <h2 th:if="${not #lists.isEmpty(garnishList)}">Garnish</h2>
+            <ul>
+                <li th:each="item : ${garnishList}">
+                    <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
+                </li>
+            </ul>
 
 
-<div id="my-bar">
-<h1>My Bar</h1>
-    <h2 th:if="${not #lists.isEmpty(vodkaList)}">Vodka</h2>
-    <ul>
-        <li th:each="item : ${vodkaList}">
-            <a th:text="${item.name}" th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(ginList)}">Gin</h2>
-    <ul>
-        <li th:each="item : ${ginList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(rumList)}">Rum</h2>
-    <ul>
-        <li th:each="item : ${rumList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-
-    <h2 th:if="${not #lists.isEmpty(tequilaList)}">Tequila</h2>
-    <ul>
-        <li  th:each="item : ${tequilaList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(whiskeyList)}">Whiskey</h2>
-    <ul>
-        <li th:each="item : ${whiskeyList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(cordialList)}">Cordial</h2>
-    <ul>
-        <li th:each="item : ${cordialList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(wineList)}">Wine</h2>
-    <ul>
-        <li th:each="item : ${wineList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(mixerList)}">Mixer</h2>
-    <ul>
-        <li th:each="item : ${mixerList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(bittersList)}">Bitters</h2>
-    <ul>
-        <li th:each="item : ${bittersList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-    <h2 th:if="${not #lists.isEmpty(garnishList)}">Garnish</h2>
-    <ul>
-        <li th:each="item : ${garnishList}">
-            <a th:text="${item.name}"th:href="|/ingredient/search/${item.id}|"></a>
-        </li>
-    </ul>
-
-
-<a href="/user/mybar/add">Add Ingredient to My Bar</a>
-</div>
-<!--TODO: Add css to move My Favorites to Right Side of screen-->
-<div id="my-favorites">
-    <h1>My Favorites</h1>
-    <ul>
-        <li th:each="drink : ${myFavorites}">
-            <a th:href="'../drink/view/'+${drink.id}" th:text="${drink.name}"></a>
-        </li>
-    </ul>
+        <a href="/user/mybar/add">Add Ingredient to My Bar</a>
+        </div>
+        <!--TODO: Add css to move My Favorites to Right Side of screen-->
+        <div id="my-favorites" class="col-md">
+            <h1>My Favorite Drinks</h1>
+            <ul>
+                <li th:each="drink : ${myFavorites}">
+                    <a th:href="'../drink/view/'+${drink.id}" th:text="${drink.name}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>

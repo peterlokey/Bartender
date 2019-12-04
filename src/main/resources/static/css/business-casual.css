@@ -287,3 +287,7 @@ textarea { vertical-align: top; }
 .sub-header{
     font-size: 4rem;
 }
+
+.center-text{
+    text-align: center;
+}
