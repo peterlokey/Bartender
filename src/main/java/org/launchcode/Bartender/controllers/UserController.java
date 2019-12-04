@@ -206,6 +206,17 @@ public class UserController {
                 typeList.add(i);
             }
         }
+
+        //alphabetize typeList before returning it
+        for (int j=0; j<typeList.size(); j++){
+            for(int i=j+1; i<typeList.size(); i++){
+                if((typeList.get(i).getName().compareToIgnoreCase(typeList.get(j).getName()) < 0)){
+                    Ingredient temp = typeList.get(j);
+                    typeList.set(j, typeList.get(i));
+                    typeList.set(i, temp);
+                }
+            }
+        }
         return typeList;
     }
 
