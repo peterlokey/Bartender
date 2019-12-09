@@ -14,14 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 
 @Controller
@@ -68,11 +63,9 @@ public class SearchController {
 
     @RequestMapping(value = "select-ingredients", method = RequestMethod.GET)
     public String selectIngredients (Model model, HttpServletRequest request){
-        HttpSession session=request.getSession(false);
-        String name = (String)session.getAttribute("name");
-        User user = findByName(name);
+
         model.addAttribute("title", "Select ingredients to search for");
-        /*model.addAttribute("myBar", user.getMyBar());*/
+
         model.addAttribute("vodkaList", generateTypeList(Ingredient.Type.Vodka, ingredientDao.findAll()));
         model.addAttribute("ginList", generateTypeList(Ingredient.Type.Gin, ingredientDao.findAll()));
         model.addAttribute("rumList", generateTypeList(Ingredient.Type.Rum, ingredientDao.findAll()));
@@ -88,8 +81,10 @@ public class SearchController {
     @RequestMapping(value = "select-ingredients", method = RequestMethod.POST)
     public String selectIngredients (Model model, @RequestParam String ingredients){
 
-        String[] ingredientsArray = ingredients.split(",");
-        ArrayList<Drink> searchResults = searchSpecificIngredients(ingredientsArray);
+        //Convert String to List//
+        ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients.split(",")));
+
+        ArrayList<Drink> searchResults= searchSelectedIngredients(ingredientsList);
 
         model.addAttribute("searchResults", searchResults);
         return "search/index";
@@ -132,20 +127,73 @@ public class SearchController {
         return null;
     }
 
-    public ArrayList<Drink> searchSpecificIngredients(String[] ingredientIds){
+    public ArrayList<Drink> searchSelectedIngredients(List<String> ingredientsList){
         ArrayList<Drink> results = new ArrayList<>();
         for (Drink drink : drinkDao.findAll()) {
-            boolean match = true;
-            for (String id : ingredientIds) {
-                if (!drink.getRecipe().containsKey(id)){
-                    match = false;
+            boolean match = false;
+            for (String ingredient : ingredientsList) {
+                if (!isNumeric(ingredient)){
+                    if (drinkContainsIngredientType(ingredient, drink)){
+                        match = true;
+                    }
+                }else if (drink.getRecipe().containsKey(ingredient)){
+                    match = true;
                 }
             }
-            if (match == true){
+            if (match){
                 results.add(drink);
             }
         }
         return results;
+    }
+
+    public boolean drinkContainsIngredientType(String typeString, Drink drink){
+        boolean match = false;
+
+        Ingredient.Type type = convertTypeStringToTypeClass(typeString);
+
+        for (String id : drink.getRecipe().keySet()){
+            Ingredient ingredient = ingredientDao.findById(Integer.parseInt(id)).get();
+            if (ingredient.getType() == type){
+                match = true;
+            }
+        }
+        return match;
+    }
+
+    public Ingredient.Type  convertTypeStringToTypeClass (String typeString){
+        Ingredient.Type type;
+        switch (typeString){
+            default:
+            case "vodka":
+                type = Ingredient.Type.Vodka;
+                break;
+            case "gin":
+                type = Ingredient.Type.Gin;
+                break;
+            case "rum":
+                type = Ingredient.Type.Rum;
+                break;
+            case "tequila":
+                type = Ingredient.Type.Tequila;
+                break;
+            case "whiskey":
+                type = Ingredient.Type.Whiskey;
+                break;
+            case "cordial":
+                type = Ingredient.Type.Cordial;
+                break;
+            case "wine":
+                type = Ingredient.Type.Wine;
+                break;
+            case "bitters":
+                type = Ingredient.Type.Bitters;
+                break;
+            case "mixer":
+                type = Ingredient.Type.Mixer;
+                break;
+        }
+        return type;
     }
 
     public List<Ingredient> generateTypeList(Ingredient.Type type, Iterable<Ingredient> ingredients){
@@ -157,5 +205,17 @@ public class SearchController {
             }
         }
         return typeList;
+    }
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            int i = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

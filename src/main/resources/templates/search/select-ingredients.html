@@ -8,64 +8,64 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <div id="my-bar">
-
     <form method="post">
-        <input type="submit" value="Search for drinks containing selected ingredients">
-        <h2>Vodka</h2>
+        <input type="submit" value="Find Drinks!">
+        <br>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="vodka">Vodka</span>
         <ul>
             <li th:each="ingredient : ${vodkaList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Gin</h2>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="gin">Gin</span>
         <ul>
             <li th:each="ingredient : ${ginList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Rum</h2>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="rum">Rum</span>
         <ul>
             <li th:each="ingredient : ${rumList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Tequila</h2>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="tequila">Tequila</span>
         <ul>
             <li th:each="ingredient : ${tequilaList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Whiskey</h2>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="whiskey">Whiskey</span>
         <ul>
             <li th:each="ingredient : ${whiskeyList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Wine</h2>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="wine">Wine</span>
         <ul>
             <li th:each="ingredient : ${wineList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Mixer</h2>
+        <span class="type-header"><input type="checkbox" name="ingredients" value="mixer">Mixer</span>
         <ul>
             <li th:each="ingredient : ${mixerList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Bitters</h2>
+        <span class="type-header"><input type="checkbox" value="bitters">Bitters</span>
         <ul>
             <li th:each="ingredient : ${bittersList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <h2>Garnish</h2>
+        <span class="type-header">Garnish</span>
         <ul>
             <li th:each="ingredient : ${garnishList}">
                 <input type="checkbox" name="ingredients" th:text="${ingredient.name}" th:value="${ingredient.id}">
             </li>
         </ul>
-        <input type="submit" value="Search for drinks containing selected ingredients">
+        <input type="submit" value="Find Drinks!">
     </form>
 
 
