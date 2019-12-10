@@ -23,9 +23,9 @@ public class HomeController {
     private UserDao userDao;
     @RequestMapping(value = "")
     public String index(HttpServletRequest request) {
-        User user = userDao.findById(55).orElse(null);
+        /*User user = userDao.findById(55).orElse(null);
         HttpSession session = request.getSession();
-        session.setAttribute("name", user.getName());
+        session.setAttribute("name", user.getName());*/
         return "index";
     }
 }

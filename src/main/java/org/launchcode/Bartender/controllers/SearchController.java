@@ -130,14 +130,14 @@ public class SearchController {
     public ArrayList<Drink> searchSelectedIngredients(List<String> ingredientsList){
         ArrayList<Drink> results = new ArrayList<>();
         for (Drink drink : drinkDao.findAll()) {
-            boolean match = false;
+            boolean match = true;
             for (String ingredient : ingredientsList) {
                 if (!isNumeric(ingredient)){
-                    if (drinkContainsIngredientType(ingredient, drink)){
-                        match = true;
+                    if (!drinkContainsIngredientType(ingredient, drink)){
+                        match = false;
                     }
-                }else if (drink.getRecipe().containsKey(ingredient)){
-                    match = true;
+                }else if (!drink.getRecipe().containsKey(ingredient)){
+                    match = false;
                 }
             }
             if (match){
