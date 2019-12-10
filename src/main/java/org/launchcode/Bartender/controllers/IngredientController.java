@@ -103,6 +103,7 @@ public class IngredientController {
         model.addAttribute("bittersList", generateTypeList(Ingredient.Type.Bitters));
         model.addAttribute("mixerList", generateTypeList(Ingredient.Type.Mixer));
         model.addAttribute("garnishList", generateTypeList(Ingredient.Type.Garnish));
+        model.addAttribute("title", "Ingredient List");
         return "ingredient/index";
     }
 
