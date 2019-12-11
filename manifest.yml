@@ -1,0 +1,6 @@
+applications:
+  - name: Bartender
+    buildpack: java_buildpack
+    path: build/libs/Bartender-0.0.1-SNAPSHOT.jar
+    services:
+      - Bartender-db2
