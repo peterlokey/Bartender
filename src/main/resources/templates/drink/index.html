@@ -8,12 +8,13 @@
 
 <span class="title-text" th:text="${title}"></span>
 <form method="post">
-    <input type="hidden" name="sorting" value="rating">
-    <input type="submit" value="Sort By Rating">
-</form>
-<form method="post">
-    <input type="hidden" name="sorting" value="alpha">
-    <input type="submit" value="Sort Alphabetically">
+    <select name="sorting">
+        <option value="A-Z" th:selected="${sorting == 'A-Z'}">A-Z</option>
+        <option value="Z-A" th:selected="${sorting == 'Z-A'}">Z-A</option>
+        <option value="Rating - Highest First" th:selected="${sorting == 'Rating - Highest First'}">Rating - Highest First</option>
+        <option value="Rating - Lowest First" th:selected="${sorting == 'Rating - Lowest First'}">Rating - Lowest First</option>
+    </select>
+    <input type="submit" value="Sort">
 </form>
 
 

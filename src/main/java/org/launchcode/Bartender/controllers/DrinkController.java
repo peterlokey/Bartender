@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.*;
 
 
+
 @Controller
 @RequestMapping(value = "drink")
 public class DrinkController {
@@ -34,7 +35,7 @@ public class DrinkController {
 
         model.addAttribute("title", "Drink List");
         model.addAttribute("drinkList", sortDrinkListAlphabetically());
-        model.addAttribute("sorting", "alpha");
+        model.addAttribute("sorting", "A-Z");
         return "drink/index";
     }
 
@@ -44,11 +45,21 @@ public class DrinkController {
         model.addAttribute("title", "Drink List");
         model.addAttribute("sorting", sorting);
         List<Drink> sortedDrinks = sortDrinkListByRating();
-        if(sorting.equals("alpha")){
+        if(sorting.equals("A-Z")){
             model.addAttribute("drinkList", sortDrinkListAlphabetically());
         }
-        if(sorting.equals("rating")){
+        if(sorting.equals("Z-A")){
+            ArrayList drinkList = sortDrinkListAlphabetically();
+            Collections.reverse(drinkList);
+            model.addAttribute("drinkList", drinkList);
+        }
+        if(sorting.equals("Rating - Highest First")){
             model.addAttribute("drinkList", sortDrinkListByRating());
+        }
+        if(sorting.equals("Rating - Lowest First")){
+            ArrayList drinkList = sortDrinkListByRating();
+            Collections.reverse(drinkList);
+            model.addAttribute("drinkList", drinkList);
         }
         return "drink/index";
     }
@@ -365,7 +376,7 @@ public class DrinkController {
         return drinkList;
     }
 
-    public List<Drink> sortDrinkListByRating(){
+    public ArrayList<Drink> sortDrinkListByRating(){
         /*Iterable<Drink> drinks = drinkDao.findAll();
         ArrayList<Drink> drinkList = new ArrayList<Drink>();*/
         ArrayList<Drink> drinkList = sortDrinkListAlphabetically();
